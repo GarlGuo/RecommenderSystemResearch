@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  22 MAY 2021 23:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  23 MAY 2021 01:01
 entering extended mode
 **./main.tex
 (main.tex
@@ -344,14 +344,14 @@ LaTeX Font Info:    ... okay on input line 26.
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(42.67912pt, 528.93675pt, 42.67912pt)
+* h-part:(L,W,R)=(36.98857pt, 540.31786pt, 36.98857pt)
 * v-part:(T,H,B)=(42.67912pt, 709.61174pt, 42.67912pt)
 * \paperwidth=614.295pt
 * \paperheight=794.96999pt
-* \textwidth=528.93675pt
+* \textwidth=540.31786pt
 * \textheight=709.61174pt
-* \oddsidemargin=-29.59087pt
-* \evensidemargin=-29.59087pt
+* \oddsidemargin=-35.28142pt
+* \evensidemargin=-35.28142pt
 * \topmargin=-66.59087pt
 * \headheight=12.0pt
 * \headsep=25.0pt
@@ -417,7 +417,12 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7> on input line 61.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 61.
- [1
+
+Underfull \hbox (badness 7451) in paragraph at lines 61--62
+\T1/lmr/m/n/10 Matrix factorization models represents the user-item
+ []
+
+[1
 
 {C:/Users/Wentao/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
@@ -425,43 +430,38 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [2] (main.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 4--9
-[]\T1/lmr/m/n/10 Lamis Al Hassanieh, Chadi Abou Jaoudeh,
+) [2] (main.bbl [3]
+Underfull \hbox (badness 10000) in paragraph at lines 76--81
+\T1/lmr/m/n/10 Collaborative filtering-based recommender system:
  []
 
-
-Underfull \hbox (badness 5817) in paragraph at lines 4--9
-\T1/lmr/m/n/10 measures for collaborative filtering recommender
- []
-
-[3]) [4] (main.aux) ) 
+) [4] (main.aux) ) 
 Here is how much of TeX's memory you used:
- 4233 strings out of 479799
- 58361 string characters out of 2879552
- 364497 words of memory out of 3000000
- 21151 multiletter control sequences out of 15000+200000
+ 4234 strings out of 479799
+ 58368 string characters out of 2879552
+ 366506 words of memory out of 3000000
+ 21152 multiletter control sequences out of 15000+200000
  590974 words of font info for 71 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 66i,6n,72p,640b,426s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/
-Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX/
-fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ma
-thsy.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program File
-s/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}<C:/Program Files/MiKTeX/fonts/type1/
-public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb>
-<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiK
-TeX/fonts/type1/public/lm/lmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public
-/lm/lmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Prog
-ram Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts
-/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr7.
-pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files
-/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/p
-ublic/lm/lmsy7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/symbols
-/msbm10.pfb>
-Output written on main.pdf (4 pages, 214374 bytes).
+ 66i,16n,72p,640b,424s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Pro
+gram Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/e
+nc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.en
+c}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/M
+iKTeX/fonts/enc/dvips/lm/lm-mathex.enc}<C:/Program Files/MiKTeX/fonts/type1/pub
+lic/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX
+/fonts/type1/public/lm/lmmi5.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm
+/lmmi7.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program
+ Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/ty
+pe1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr5.pfb
+><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr7.pfb><C:/Program Files/MiKT
+eX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fonts/type1/public
+/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy7.pfb><C:/Pro
+gram Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (4 pages, 238106 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
+ 83 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

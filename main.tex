@@ -3,8 +3,8 @@
 \usepackage{babel}
 \linespread{1.5}
 \geometry{
-	left=15mm,
-	right=15mm,
+	left=13mm,
+	right=13mm,
 	top=15mm,
 	bottom=15mm,
 }
@@ -138,14 +138,14 @@
 		
 		$\mathcal{I}_{uv}$ means common item rated by both user $u$ and user $v$. $\bar{r_u}$ means average rating of user $u$ on the shared item set.
 		\begin{equation}
-			r = \frac{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})(r_{vi} - \bar{r_v})}{\sqrt{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})^2(r_{vi} - \bar{r_v})^2}}
+			\text{sim} = \frac{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})(r_{vi} - \bar{r_v})}{\sqrt{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})^2(r_{vi} - \bar{r_v})^2}}
 		\end{equation}
 		
 		\item Adjusted cosine similarity
 		
 		$\bar{r_u}$ means average rating of user $u$ on the entire item set.
 		\begin{equation}
-		r = \frac{\sum_{i}(r_{ui} - \bar{r_u})(r_{vi} - \bar{r_v})}{\sqrt{\sum_{i}(r_{ui} - \bar{r_u})^2(r_{vi} - \bar{r_v})^2}}
+			\text{sim} = \frac{\sum_{i}(r_{ui} - \bar{r_u})(r_{vi} - \bar{r_v})}{\sqrt{\sum_{i}(r_{ui} - \bar{r_u})^2(r_{vi} - \bar{r_v})^2}}
 		\end{equation}
 	
 	\end{itemize}
@@ -157,11 +157,43 @@
 
 	\subsection{SVD++ Model}
 	
-	The traditional SVD method only considers users' explicit ratings but do not take implicit data into account. Although implicit data (mouse move, reading time, etc.) might not be publicly available, there is one kind of implicit data always available: whether a user rates on an item (rate vs. not rate). Ye
+	The traditional SVD method only considers users' explicit ratings but do not take implicit data into account. Although implicit data (mouse move, reading time, etc.) might not be publicly available, there is one kind of implicit data always available: whether a user rates on an item (rate vs. not rate). 
 	
 	
+	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown below 
 	
-	\subsection{Regularized SVD Method}
+	\begin{equation} \label{SVD++}
+		\begin{split}
+			\hat{r}_{ui} =& \ \mu + b_i + b_u \\ 
+			& + q_i^T  (p_u + |N_u|^{-.5} \sum_{j \in N_u}y_j) \\ 
+			& + |R^k(i; u)|^{-.5} \sum_{j \in R^k(i; u)} (r_{u_j} - b_{u_j}) w_{ij} \\ 
+			& + |N^k(i; u)|^{-.5} \sum_{j \in N^k(i; u)} c_{ij}
+		\end{split}
+	\end{equation}
+	
+	
+	Rule \ref{SVD++} is a 3-tier model. The first tier is $b_{ui}$ as mentioned before. 
+	
+	
+	The second tier $q_i^T  (p_u + |N_{(u)}|^{-\frac{1}{2}} \sum_{j \in N_{(u)}}y_j)$ describes the intersection between user profile and item profile. We need to introduce a few notations to understand this tier:
+	\begin{itemize}
+		\item $R_u$ all items for which user $u$ provides a rating 
+		
+		\item $N_u$ all items for which user $u$ provides an implicit preference
+		
+		\item $S^k(i)$ $k$ items rated by $u$ that are similar to item $i$
+		
+		\item $N^k{(i; u)} = N_u \cap S^k (i)$
+		
+		\item $R^k{(i; u)} = R_u \cap S^k (i)$
+		
+		\item $w_{ij}$ weight from $j$ to $i$
+		
+		\item $c_{ij}$ significance offset (indication of predictability by $j$ to $i$)
+	\end{itemize}
+	
+	The remaining terms form the final tier, or "neighborhood tier" called by Koren, as it contributes some adjustments to the profile.
+	\subsection{Regularized SVD Model}
 	
 	% \section{Problems with Matrix Factorization Method}
 	
