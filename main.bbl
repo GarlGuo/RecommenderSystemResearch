@@ -49,6 +49,13 @@ Dohyun Kim and Bong-Jin Yum.
   analysis.
 \newblock {\em Expert Systems with Applications}, 28(4):823--830, 2005.
 
+\bibitem{korenFactorization}
+Yehuda Koren.
+\newblock Factorization meets the neighborhood: a multifaceted collaborative
+  filtering model.
+\newblock In {\em Proceedings of the 14th ACM SIGKDD international conference
+  on Knowledge discovery and data mining}, pages 426--434, 2008.
+
 \bibitem{koren}
 Yehuda Koren.
 \newblock The bellkor solution to the netflix grand prize.

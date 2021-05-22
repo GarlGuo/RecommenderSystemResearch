@@ -11,45 +11,45 @@ I was expecting a `,' or a `}'---line 1 of file reference.bib
 I'm skipping whatever remains of this entry
 Warning--empty journal in ApplySVD
 Warning--empty year in ApplySVD
-You've used 14 entries,
+You've used 15 entries,
             2118 wiz_defined-function locations,
-            593 strings with 6387 characters,
-and the built_in function-call counts, 5410 in all, are:
-= -- 553
-> -- 240
-< -- 9
-+ -- 98
-- -- 80
-* -- 365
-:= -- 854
-add.period$ -- 46
-call.type$ -- 14
-change.case$ -- 81
+            599 strings with 6615 characters,
+and the built_in function-call counts, 5825 in all, are:
+= -- 597
+> -- 247
+< -- 10
++ -- 101
+- -- 82
+* -- 385
+:= -- 909
+add.period$ -- 49
+call.type$ -- 15
+change.case$ -- 85
 chr.to.int$ -- 0
-cite$ -- 16
-duplicate$ -- 218
-empty$ -- 422
-format.name$ -- 80
-if$ -- 1173
+cite$ -- 17
+duplicate$ -- 241
+empty$ -- 463
+format.name$ -- 82
+if$ -- 1272
 int.to.chr$ -- 0
-int.to.str$ -- 14
-missing$ -- 13
-newline$ -- 71
-num.names$ -- 28
-pop$ -- 97
+int.to.str$ -- 15
+missing$ -- 14
+newline$ -- 76
+num.names$ -- 30
+pop$ -- 104
 preamble$ -- 1
-purify$ -- 67
+purify$ -- 70
 quote$ -- 0
-skip$ -- 162
+skip$ -- 182
 stack$ -- 0
-substring$ -- 339
-swap$ -- 72
-text.length$ -- 9
+substring$ -- 376
+swap$ -- 83
+text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 56
+type$ -- 60
 warning$ -- 2
-while$ -- 57
-width$ -- 16
-write$ -- 157
+while$ -- 62
+width$ -- 17
+write$ -- 168
 (There was 1 error message)
