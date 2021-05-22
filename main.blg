@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+Reallocating 'name_of_file' (item size: 1) to 14 items.
+Database file #1: reference.bib
+I was expecting a `,' or a `}'---line 1 of file reference.bib
+ : @article{RS 
+ :             survey,
+I'm skipping whatever remains of this entry
+Warning--empty journal in ApplySVD
+Warning--empty year in ApplySVD
+You've used 14 entries,
+            2118 wiz_defined-function locations,
+            593 strings with 6387 characters,
+and the built_in function-call counts, 5410 in all, are:
+= -- 553
+> -- 240
+< -- 9
++ -- 98
+- -- 80
+* -- 365
+:= -- 854
+add.period$ -- 46
+call.type$ -- 14
+change.case$ -- 81
+chr.to.int$ -- 0
+cite$ -- 16
+duplicate$ -- 218
+empty$ -- 422
+format.name$ -- 80
+if$ -- 1173
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 13
+newline$ -- 71
+num.names$ -- 28
+pop$ -- 97
+preamble$ -- 1
+purify$ -- 67
+quote$ -- 0
+skip$ -- 162
+stack$ -- 0
+substring$ -- 339
+swap$ -- 72
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 56
+warning$ -- 2
+while$ -- 57
+width$ -- 16
+write$ -- 157
+(There was 1 error message)

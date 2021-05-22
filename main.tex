@@ -1,0 +1,165 @@
+\documentclass[letter paper, 11pt]{article}
+\usepackage{geometry}
+\usepackage{babel}
+\linespread{1.95}
+\geometry{
+	left=13mm,
+	right=13mm,
+	top=15mm,
+	bottom=15mm,
+}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{amsthm}
+\usepackage{titlesec}
+\usepackage{multicol}
+
+\DeclareMathOperator*{\argmin}{argmin}
+
+\begin{document}
+	
+	
+	\title{%
+		Review of Matrix Factorization Methods in Recommender System \\
+		\large Final Project Report of CS 6241}
+	
+	\author{Wentao Guo}
+	
+	\date{}
+	
+	\maketitle
+	
+	
+	\section*{Abstract}		
+	
+	\section*{Keyword}
+	\begin{center}
+	SVD, SVD++, Recommender System, Collaborative Filtering
+	\end{center}
+
+	
+	\begin{multicols}{2}
+	\section{Background}
+	\paragraph{}
+	Developed in 1990s, the recommender system (RS) has been applied in e-commence, music apps, job portal, social networking and more \cite{netflix}. The recommender system collects information on users' behaviors explicitly (users' ratings on items) and implicitly (users' mouse movements, attention on one page, etc.) and makes prediction on users' preferences. For example, Netflix applies a five-star ratings to help users find their favorite movies and maintain their subscriptions \cite{gower}, and Amazon selects products based on the predicted users' favors to gain profits. 
+	\paragraph{}
+	In October 2006, Netflix launched a competition for which they rewarded the team that can beat Netflix's Cinematch system by at least 10\% Root Mean Squared Error \cite{gower}. This competition arouse great attention in collaborative filtering field as the dataset covered 100 million ratings for 500, 000 anonymous customers on 17, 000 movies, which was greater than previous public dataset in the orders of magnitude \cite{MFinRS}. The final grand prize was given to "Bellkor's Pragmatic Chaos" team in 2009 \cite{gower} \cite{koren}. 
+	\paragraph{}
+	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++, iterative SVD, and more \cite{gower} \cite{SVD++} \cite{contextual}. 
+	\paragraph{}
+	% 这篇paper该讲什么
+	
+	
+	\section{Matrix Factorization Tools}
+	Matrix factorization models represents the user-item interaction in a latent joint space \cite{MFinRS}. Each item $i$ is associated with a vector $q_i \in \mathbb{R}^f$ and user $u$ is associated with a vector $p_u \in \mathbb{R}^f$. The rationale behind such representation is: item $i$ will possess some unknown factors in a measure, positive or negative, stored in entries of $q_i$, and user will have different favors toward these factors, and such interest is represented as entries in $p_u$. Therefore, we can take inner product to get an approximate of the user $u$'s rating on item $i$ as \cite{MFinRS} 
+	\begin{equation}
+		\hat{r}_{ui} = q_i^T  p_u 
+	\end{equation}
+	
+	\subsection{Bias}
+	
+	\subsection{Traditional SVD Method}
+
+	SVD, as a common dimension reduction tool, originally used in information retrieval to identify latent semantic factor (as Latent Semantic Indexing), can represent the user-item interactions in a low dimensional space \cite{MFinRS} \cite{ApplySVD}. SVD approximates a matrix $A \in \mathbb{R}^{m \times n}$ in a form as 
+	\begin{equation}
+		A = U \Sigma V^T
+	\end{equation}
+	Suppose the rank of A is $r$, there are three main properties in SVD\cite{ApplySVD} \cite{gower}:
+	\begin{itemize}
+		\item 
+		The initial $r$ singular values of diagonal matrix $\Sigma$ holds that $\forall i \in [1, r]\,\sigma_i > 0$ and $\sigma_1 \geq \sigma_2 \geq ... \geq \sigma_r$.
+		
+		\item 
+		The first $r$ columns of orthogonal matrix $U$ are eigenvectors of $A\,A^T$ and span the column space of $A$.
+			
+		\item
+		The first $r$ columns of orthogonal matrix $V$ are eigenvectors of $A^T\,A$ and span the row space of $A$.
+	\end{itemize}
+
+	People usually takes the best rank-$k$ approximation of matrix $A$ as 
+	\begin{equation} \label{trun-SVD}
+		A_k = U_k \Sigma_k V_k^T
+	\end{equation}
+	
+	with $U_k \in \mathbb{R}^{m \times k}, \ \Sigma_k \in \mathbb{R}^{k \times k}, \ V_k \in \mathbb{R}^{k \times n}$.
+	
+	We will take a rating matrix $R$ with users $u_1, u_2, ... u_i$ in the row and items $i_1, i_2, ... i_j$ in the column, and the entry $R_{ij}$ is the estimated interest of user $u_i$ on item $i_j$. \cite{MFinRS} \cite{CF-IterPCA} \cite{ApplySVD}.
+	
+	Notice that matrix $R$ is often sparse and require some prepossessing. A common prepossessing approach is to take the row averages to replace all of the missing values in the matrix $R$ and normalize $R$ by subtracting row averages \cite{ApplySVD} \cite{CF-IterPCA}.
+	
+	We then compute $U_k \Sigma_k V_k^T$ as equation \ref{trun-SVD}, and form two matrix products: $U_k \sqrt{\Sigma_k^T}$ and $\sqrt{\Sigma_k} V_k^T$.
+	
+	There are some variants regarding the computation of predicted rating \cite{ApplySVD} \cite{SVD-performance}. For example, Manolis et al. \cite{SVD-performance} provided a formula for SVD-CF prediction rating for user $u_i$ on item $i_j$ as:
+	
+	\begin{equation}
+		P_{ij} = \bar{r_i} + U_k \sqrt{\Sigma_k^T (i)} \sqrt{\Sigma_k} V_k^T (j)
+	\end{equation}
+	
+	Another variant is based on PCA, with the previous steps identical except that we need to replace and subtract column average $\bar{c_j}$ for prepossessing $R$. In this case, prediction score for user $u_i$ on item $i_j$ will be
+	
+	\begin{equation}
+		P_{ij} = \bar{c_j} + U_k \sqrt{\Sigma_k^T (i)} \sqrt{\Sigma_k} V_k^T (j)
+	\end{equation}
+
+	Some researchers incorporate the reduced matrix $R_{\text{red}} = U_k \Sigma_k V_k^T$ into the calculation of similarity measure to predict the new user or item's score based on the existing clusters. These approaches are usually categorized to user-based collaborative filtering or item-based collaborative filtering depending on the subject of similarity measure.
+	
+	
+	The following are common similarity measures in literature\cite{CF}\cite{ApplySVD} \cite{new-sim} \cite{sim-CF} \cite{CF-sign}:
+	\begin{itemize}
+		\item Pearson correlation
+		
+		$\mathcal{I}_{uv}$ means common item rated by both user $u$ and user $v$. $\bar{r_u}$ means average rating of user $u$ on the shared item set.
+		\begin{equation}
+			r = \frac{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})(r_{vi} - \bar{r_v})}{\sqrt{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})^2(r_{vi} - \bar{r_v})^2}}
+		\end{equation}
+		
+		\item Cosine similarity
+		\begin{equation}
+			r = \frac{\vec{r_u} \cdot \vec{r_v}}{\|\vec{r_u}\| \|\vec{r_v}\|}
+		\end{equation}
+		
+		\item Adjusted cosine similarity
+		
+		$\bar{r_u}$ means average rating of user $u$ on the entire item set.
+		\begin{equation}
+		r = \frac{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})(r_{vi} - \bar{r_v})}{\sqrt{\sum_{i \in \mathcal{I}_{uv}}(r_{ui} - \bar{r_u})^2(r_{vi} - \bar{r_v})^2}}
+		\end{equation}
+	
+		\item Constrained Pearson correlation 
+		
+		$r_{\text{med}}$ means the medium of rating scale. $\bar{r_u}$ means average rating of user $u$ on the shared item set
+		\begin{equation}
+			r = \frac{\sum_{i}(r_{ui} - r_{\text{med}})(r_{vi} - r_{\text{med}})}{\sqrt{\sum_{i}(r_{ui} - r_{\text{med}})^2(r_{vi} - r_{\text{med}})^2}}
+		\end{equation}
+		
+		\item Mean squared difference
+		\begin{equation}
+			r = 1 - \frac{1}{\mid \mathcal{I}_{uv} \mid}\sum_{i \in \mathcal{I}_{uv}} (r_{ui} - r_{vi})^2
+		\end{equation}
+	\end{itemize}
+	Pearson-correlation looks really similar to adjusted cosine similarity except that adjusted cosine similarity is calculated over the entire set of rated vectors while person correlation is calculated over co-rated vector \cite{sim}. For the missing value case, a typical approach is to set it as zero \cite{new-sim}.
+
+
+	\subsection{SVD++ Method}
+	
+	\subsection{Iterative SVD Method}
+	
+	\subsection{Regularized SVD Method}
+	
+	\section{Experiment}
+	similarity
+	
+	
+	\section{Conclusion}
+
+	\bibliographystyle{plain}
+	\bibliography{reference.bib}
+	\end{multicols}
+\end{document}
