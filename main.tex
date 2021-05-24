@@ -20,8 +20,10 @@
 \usepackage{amsthm}
 \usepackage{titlesec}
 \usepackage{multicol, listings}
+\usepackage{graphicx}
+\usepackage{algorithmic}
+\usepackage{algorithm}
 
-\DeclareMathOperator*{\argmin}{argmin}
 
 \begin{document}
 	
@@ -195,23 +197,67 @@
 			$P\ Q$ remains the same and $C$ is the matrix for context (which will be discussed later)
 		\end{itemize}
 		
-
-		
 		\item define decision function
+		
+		$\hat{r}_{ui}$ is represented by a function of $q_i^T$, $p_u$ and other factors such as social contexts, bias, regularization terms, temporal dynamics and more.
 		
 		
 		\item define objective function
 		
+		The objective $\mathcal{L}$ measures the error difference between $\hat{R}$ and $R$, and generally convex on variables $p$ and $q$. Upon defining $\mathcal{L}$, a numerical optimization process shall also be determined.
 		
 		\item define model learning
 		
+		(Stochastic) Gradient descent generally applies here as follow. 
+		\begin{figure}[h]
+			\caption{Generic Algorithm for Latent Factor Approach\cite{latentFactor-RS}}
+			\centering
+			\includegraphics[width=7cm, height=6cm]{Latent-factor-Framework1.png}
+		\end{figure}
+		
 	\end{enumerate}
 
+	Koren et al. \cite{MFinRS} suggest that, though common in practices, stochastic gradient descent can be unfavorable compare to alternate least squares in two cases. The first case is when the system use parallelization for computing $q_i$ and $p_u$ independently with other item/user factors. The second case is when the system is centered on dense implicit data, which will turn looping as gradient descent does impractical.
+
+	
 
 	\subsection{Regularized SVD Model}
 
-	Regularized SVD 
+	\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
+	\newcommand{\pluseq}{\mathrel{+}=}
 
+	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is
+	\begin{equation}
+		\begin{split}
+			e_{ui}\ \myeq&\ r_{ui} - q_i^T p_u \\
+			q_i\ \pluseq&\ \gamma (e_{ui} * p_u - \lambda * q_i) \\
+			p_u\ \pluseq&\ \gamma (e_{ui} * q_i - \lambda * p_u)
+		\end{split}
+	\end{equation}
+
+	The original purpose of regularization terms is to avoid overfitting and common approach includes lasso and ridge (or L1 L2) regularization \cite{RSVD-News}, as shown in Algorithm \ref{L1}.
+	
+	\floatname{algorithm}{Algorithm}
+	\begin{algorithm}
+		\caption{Update Main Body of SVD with Lasso (L1) Regularization\cite{RSVD-News}}
+		\label{L1}
+		\begin{algorithmic}
+			\STATE $e_{ui} = r_{ui} - p_u q_i^T$
+			\IF{$p_u \geq 0$}
+				\STATE $p_u \pluseq \gamma (e_{ui} q_j - \lambda \alpha - \lambda p_u ( 1 - \alpha))$
+			\ELSE
+				\STATE $p_u \pluseq \gamma (e_{ui} q_j + \lambda \alpha - \lambda p_u ( 1 - \alpha))$			
+			\ENDIF
+			
+			\IF{$q_i \geq 0$}
+				\STATE $q_i \pluseq \gamma (e_{ui} p_i - \lambda \alpha - \lambda q_i ( 1 - \alpha))$
+			\ELSE
+				\STATE $q_i \pluseq \gamma (e_{ui} p_i + \lambda \alpha - \lambda p_u ( 1 - \alpha))$			
+			\ENDIF
+		\end{algorithmic}
+	\end{algorithm}
+
+	An ALS implementation of SVD with ridge (L2) regularization is provided by Zheng et al. \cite{RSVD}.
 
 	\subsection{SVD++ Model}
 	
@@ -264,7 +310,7 @@
 		\end{split}
 	\end{equation}
 	
-	The regularization term $|U_j|^{-1/2}$ and $|I_u|^{-1/2}$ are weighted-$\lambda$-regularization approach from .We can then devise a gradient descent method for this minimum objective function. The second and third modification is essentially similar to the first one in structure and the formula is omitted here for brevity.
+	The regularization term $|U_j|^{-1/2}$ and $|I_u|^{-1/2}$ are weighted-$\lambda$-regularization approach. We can then devise a gradient descent method for this minimum objective function. The second and third modification is essentially similar to the first one in structure and the formula is omitted here for brevity.
 	
 	% \section{Problems with Matrix Factorization Method}
 	

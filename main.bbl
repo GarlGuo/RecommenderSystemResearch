@@ -50,6 +50,13 @@ Maryam Jallouli, Sonia Lajmi, and Ikram Amous.
 \newblock {\em International Journal of Computers and Applications}, pages
   1--8, 2020.
 
+\bibitem{RSVD-News}
+Youchun Ji, Wenxing Hong, Yali Shangguan, Huan Wang, and Jing Ma.
+\newblock Regularized singular value decomposition in news recommendation
+  system.
+\newblock In {\em 2016 11th International Conference on Computer Science \&
+  Education (ICCSE)}, pages 621--626. IEEE, 2016.
+
 \bibitem{SVD++performance}
 Yancheng Jia, Changhua Zhang, Qinghua Lu, and Peng Wang.
 \newblock Users' brands preference based on svd++ in recommender systems.
