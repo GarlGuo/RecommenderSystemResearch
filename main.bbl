@@ -19,6 +19,12 @@ Jes{\'u}s Bobadilla, Antonio Hernando, Fernando Ortega, and Abraham
 \newblock Collaborative filtering based on significances.
 \newblock {\em Information Sciences}, 185(1):1--17, 2012.
 
+\bibitem{MF-Model-Survey}
+Dheeraj Bokde, Sheetal Girase, and Debajyoti Mukhopadhyay.
+\newblock Matrix factorization model in collaborative filtering algorithms: A
+  survey.
+\newblock {\em Procedia Computer Science}, 49:136--146, 2015.
+
 \bibitem{gower}
 Stephen Gower.
 \newblock Netflix prize and svd, 2014.
@@ -30,6 +36,13 @@ Lin Guo and Qin~Ke Peng.
 \newblock In {\em Applied Mechanics and Materials}, volume 347, pages
   2919--2925. Trans Tech Publ, 2013.
 
+\bibitem{latentFactor-RS}
+Maryam Jallouli, Sonia Lajmi, and Ikram Amous.
+\newblock Latent factor model applied to recommender system: realization, steps
+  and algorithm.
+\newblock In {\em European, Mediterranean, and Middle Eastern Conference on
+  Information Systems}, pages 606--618. Springer, 2017.
+
 \bibitem{contextual}
 Maryam Jallouli, Sonia Lajmi, and Ikram Amous.
 \newblock When contextual information meets recommender systems: extended svd++
@@ -37,7 +50,7 @@ Maryam Jallouli, Sonia Lajmi, and Ikram Amous.
 \newblock {\em International Journal of Computers and Applications}, pages
   1--8, 2020.
 
-\bibitem{SVD++}
+\bibitem{SVD++performance}
 Yancheng Jia, Changhua Zhang, Qinghua Lu, and Peng Wang.
 \newblock Users' brands preference based on svd++ in recommender systems.
 \newblock In {\em 2014 ieee workshop on advanced research and technology in
@@ -61,6 +74,13 @@ Yehuda Koren.
 \newblock The bellkor solution to the netflix grand prize.
 \newblock {\em Netflix prize documentation}, 81(2009):1--10, 2009.
 
+\bibitem{koren2010}
+Yehuda Koren.
+\newblock Factor in the neighbors: Scalable and accurate collaborative
+  filtering.
+\newblock {\em ACM Transactions on Knowledge Discovery from Data (TKDD)},
+  4(1):1--24, 2010.
+
 \bibitem{MFinRS}
 Yehuda Koren, Robert Bell, and Chris Volinsky.
 \newblock Matrix factorization techniques for recommender systems.
@@ -71,6 +91,12 @@ Haifeng Liu, Zheng Hu, Ahmad Mian, Hui Tian, and Xuzhen Zhu.
 \newblock A new user similarity model to improve the accuracy of collaborative
   filtering.
 \newblock {\em Knowledge-Based Systems}, 56:156--166, 2014.
+
+\bibitem{review}
+Rachana Mehta and Keyur Rana.
+\newblock A review on matrix factorization techniques in recommender systems.
+\newblock In {\em 2017 2nd International Conference on Communication Systems,
+  Computing and IT Applications (CSCITA)}, pages 269--274. IEEE, 2017.
 
 \bibitem{CF}
 Ritu Sharma, Dinesh Gopalani, and Yogesh Meena.

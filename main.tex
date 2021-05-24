@@ -1,10 +1,10 @@
-\documentclass[letter paper, 10.5pt]{article}
+\documentclass[letter paper, 11pt]{article}
 \usepackage{geometry}
 \usepackage{babel}
-\linespread{1.5}
+\linespread{1.3}
 \geometry{
-	left=13mm,
-	right=13mm,
+	left=15mm,
+	right=15mm,
 	top=15mm,
 	bottom=15mm,
 }
@@ -19,7 +19,7 @@
 \usepackage{enumitem}
 \usepackage{amsthm}
 \usepackage{titlesec}
-\usepackage{multicol}
+\usepackage{multicol, listings}
 
 \DeclareMathOperator*{\argmin}{argmin}
 
@@ -45,7 +45,6 @@
 	\end{center}
 
 	
-	\begin{multicols}{2}
 	\section{Background} 
 	\paragraph{}
 	Developed in 1990s, the recommender system (RS) has been applied in e-commence, music apps, job portal, social networking and more \cite{netflix}. The recommender system collects information on users' behaviors explicitly (users' ratings on items) and implicitly (users' mouse movements, attention on one page, etc.) and makes prediction on users' preferences. For example, Netflix applies a five-star ratings to help users find their favorite movies and maintain their subscriptions \cite{gower}, and Amazon selects products based on the predicted users' favors to gain profits. 
@@ -54,7 +53,7 @@
 	In October 2006, Netflix launched a competition for which they rewarded the team that can beat Netflix's Cinematch system by at least 10\% Root Mean Squared Error \cite{gower}. This competition arouse great attention in collaborative filtering field as the dataset covered 100 million ratings for 500, 000 anonymous customers on 17, 000 movies, which was greater than previous public dataset in the orders of magnitude \cite{MFinRS}. The final grand prize was given to "Bellkor's Pragmatic Chaos" team in 2009 \cite{gower} \cite{koren}. 
 	
 	
-	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches \cite{korenFactorization}. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++, iterative SVD, and more \cite{gower} \cite{SVD++} \cite{contextual} \cite{korenFactorization}. 
+	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches \cite{korenFactorization}. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++, iterative SVD, and more \cite{gower} \cite{SVD++performance} \cite{contextual} \cite{korenFactorization}. 
 	
 	\section{Rationale behind Collaborative Filtering Recommender System}
 	\subsection{User-item Interaction}
@@ -85,7 +84,7 @@
 	\end{equation}
 	
 	
-	\section{SVD-Related Methods}
+	\section{SVD-Based CF Methods}
 	\subsection{Standard SVD-CF Model}
 
 	SVD, as a common dimension reduction tool, originally used in information retrieval to identify latent semantic factor (as Latent Semantic Indexing), can represent the user-item interactions in a low dimensional space \cite{MFinRS} \cite{ApplySVD}. SVD approximates a matrix $A \in \mathbb{R}^{m \times n}$ in a form as 
@@ -117,16 +116,16 @@
 	
 	We then compute $U_k \Sigma_k V_k^T$ as equation \ref{trun-SVD}, and form two matrix products: $U_k \sqrt{\Sigma_k^T}$ and $\sqrt{\Sigma_k} V_k^T$.
 	
-	There are some variants regarding the computation of predicted rating \cite{ApplySVD} \cite{SVD-performance}. For example, Manolis et al. \cite{SVD-performance} provided a formula for SVD-CF prediction rating for user $u_i$ on item $i_j$ as:
+	There are some variants regarding the computation of predicted rating \cite{ApplySVD} \cite{SVD-performance}. For example, Manolis et al. \cite{SVD-performance} provided a formula for SVD-CF prediction rating for user $u$ on item $i$ as:
 	
 	\begin{equation}
-		P_{ij} = \bar{r_i} + U_k \sqrt{\Sigma_k^T [i]} \sqrt{\Sigma_k} V_k^T (j)
+		\hat{r}_{ui} = \bar{r_u} + U_k \sqrt{\Sigma_k^T [u]} \sqrt{\Sigma_k} V_k^T (i)
 	\end{equation}
 	
-	Another variant is based on PCA, with the previous steps identical except that we need to replace and subtract column average $\bar{c_j}$ for prepossessing $R$. In addition, prediction score for user $u_i$ on item $i_j$ will be
+	Another variant is based on PCA, with the previous steps identical except that we need to replace and subtract column average $\bar{c_j}$ for prepossessing $R$. In addition, prediction score for user $u$ on item $i$ will be
 	
 	\begin{equation}
-		P_{ij} = \bar{c_j} + U_k \sqrt{\Sigma_k^T [i]} \sqrt{\Sigma_k} V_k^T (j)
+		\hat{r}_{ui} = \bar{r_i} + U_k \sqrt{\Sigma_k^T [u]} \sqrt{\Sigma_k} V_k^T (i)
 	\end{equation}
 
 	Some researchers incorporate the reduced matrix $R_{\text{red}} = U_k \Sigma_k V_k^T$ into the calculation of similarity measure to predict the new user or item's score based on the existing clusters. These approaches are usually categorized to user-based collaborative filtering or item-based collaborative filtering depending on the subject of similarity measure.
@@ -153,7 +152,48 @@
 
 	Pearson-correlation looks really similar to adjusted cosine similarity except that adjusted cosine similarity is calculated over the entire set of rated vectors while person correlation is calculated over co-rated vector \cite{sim}. For the missing value case, a typical approach is to set it as zero \cite{new-sim}.
 
-	After we calculate similarity measure, we will 
+	In item-based collaborative filtering, after we calculate similarity measure, we normally select nearest $l$ neighbors and then make the prediction (or compute prediction rating). The first algorithm proposed by Vozalis and Margaritis \cite{ApplySVD} provides a formula as
+	
+	\begin{equation}
+		\hat{r_{ui}} = \dfrac{\sum_{j = 1}^{l} \text{sim}_{ij} * (R_{\text{red}_{uj}} + \bar{r_u})}{\sum_{j=1}^{l} |\text{sim}_{ij}|}
+	\end{equation}
+
+	Variants on prediction rating formula exist, but this is one classical approach of item-based collaborative filtering. The process of user-based collaborative filtering is similar to item-based collaborative filtering except the implementation of SVD on $R$ and prediction rating is different. 
+	
+	If we formulate a framework neighborhood-based collaborative filtering (including user-based and item-based) based on previous steps, we will obtain what Bokde et al. purpose \cite{MF-Model-Survey}\footnote{The prediction rating process can be combined with or separated from recommendation in real practices.}:
+	
+	\begin{enumerate}
+		\item Prepossessing:
+		build a user-item matrix and perform dimensional reduction
+		
+		\item Similarity Evaluation:
+		formulate the neighborhood with similarity metrics
+		
+		\item Prediction Rating Process \& Recommendation:
+		calculate the correlation and finally provide a recommendation
+	\end{enumerate}
+	 
+	This framework more applies to neighborhood approach. Some researchers are also interested in the framework of "latent semantic model". Jallouli et al. developed another framework for latent factor model \cite{latentFactor-RS} as follows
+	
+	\begin{enumerate}
+		\item define decomposition model
+		
+		
+		\item define decision function
+		
+		
+		\item define objective function
+		
+		
+		\item define model learning
+		
+	\end{enumerate}
+
+
+	\subsection{Regularized SVD Model}
+
+	Regularized SVD 
+
 
 	\subsection{SVD++ Model}
 	
@@ -165,9 +205,8 @@
 	\begin{equation} \label{SVD++}
 		\begin{split}
 			\hat{r}_{ui} =& \ \mu + b_i + b_u \\ 
-			& + q_i^T  (p_u + |N_u|^{-.5} \sum_{j \in N_u}y_j) \\ 
-			& + |R^k(i; u)|^{-.5} \sum_{j \in R^k(i; u)} (r_{u_j} - b_{u_j}) w_{ij} \\ 
-			& + |N^k(i; u)|^{-.5} \sum_{j \in N^k(i; u)} c_{ij}
+			& + q_i^T  (p_u + |N_u|^{-1/2} \sum_{j \in N_u}y_j) \\ 
+			& + |R^k(i; u)|^{-1/2} \sum_{j \in R^k(i; u)} (r_{u_j} - b_{u_j}) w_{ij} + |N^k(i; u)|^{-1/2} \sum_{j \in N^k(i; u)} c_{ij}
 		\end{split}
 	\end{equation}
 	
@@ -177,25 +216,62 @@
 	
 	The second tier $q_i^T  (p_u + |N_{(u)}|^{-\frac{1}{2}} \sum_{j \in N_{(u)}}y_j)$ describes the intersection between user profile and item profile. We need to introduce a few notations to understand this tier:
 	\begin{itemize}
-		\item $R_u$ all items for which user $u$ provides a rating 
+		\item $R_u$ is the set of all items for which user $u$ provides a rating. $N_u$ is the set of all items for which user $u$ provides an implicit preference. $S^k(i)$ is the set of $k$ items rated by $u$ that are similar to item $i$.
 		
-		\item $N_u$ all items for which user $u$ provides an implicit preference
+		\item $N^k{(i; u)} = N_u \cap S^k (i)$. $R^k{(i; u)} = R_u \cap S^k (i)$
 		
-		\item $S^k(i)$ $k$ items rated by $u$ that are similar to item $i$
-		
-		\item $N^k{(i; u)} = N_u \cap S^k (i)$
-		
-		\item $R^k{(i; u)} = R_u \cap S^k (i)$
-		
-		\item $w_{ij}$ weight from $j$ to $i$
-		
-		\item $c_{ij}$ significance offset (indication of predictability by $j$ to $i$)
+		\item $w_{ij}$ is a weight from item $j$ to $i$. $c_{ij}$ is a significance offset (indication of predictability by item $j$ to $i$)
 	\end{itemize}
 	
-	The remaining terms form the final tier, or "neighborhood tier" called by Koren, as it contributes some adjustments to the profile.
-	\subsection{Regularized SVD Model}
+	The remaining terms form the final tier, or "neighborhood tier" called by Koren \cite{korenFactorization}, as it contributes some adjustments to the profile.
+	
+	The entire SVD++ model usually begins with standard SVD decomposition and calculation of similarity measure as mentioned before. After forming $S^k(i)$, a gradient descent algorithm will be applied to get predicted rating from equation \ref{SVD++}, as developed by Koren et al\cite{koren2010}.  
+	
+	SVD++ model arouses great research interests has been applied and tested in numerous dataset \cite{SVD++performance} \cite{korenFactorization} and it generally beats traditional SVD-CF model. However, the contribution of SVD++ is far more than an improvement in benchmark but a new field for exploration: context \cite{contextual}, or "any information that can be used to characterize the situation of entities" by Jallouli et al. Scholars then incorporate more contexts (trust, temporal dynamics, environmental information, etc.) into SVD++ method and developed methods like TrustMF, TimeSVD++, and more \cite{contextual} \cite{review}.
+	
+			
+	Jallouli et al., for instance, suggests three modifications to SVD++ model to include influence of previously preferred items, user-user social information, and environmental information \cite{contextual}. The first modification brings the following rating prediction function (notice the term $\sum_{i \in I_u} y_i$ as latent factors of previously preferred items):
+	
+	\begin{equation}
+		\hat{r}_{ui} = \mu + b_i + b_u  + (q_j^T + |I_u|^{-1/2}\sum_{i \in I_u} y_i) p_u
+	\end{equation}
+	
+	The minimum objective function is presented as follows:
+	
+	\begin{equation}
+		\begin{split}
+			\mathcal{L} = &\ \dfrac{1}{2} \sum_{(u, j)} (\hat{r_{uj}} - r_{uj})^2 + \dfrac{\lambda}{2} \sum_{u \in U_j} |I_u|^{-1/2} b_u^2 + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_j|^{-1/2} b_j^2 \\
+			& + \dfrac{\lambda}{2} \sum_{u \in U_j} |I_u|^{-1/2} \|p_u\|_F^{2} + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_j|^{-1/2} \|q_j\|_F^{2} \\
+			& + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_i|^{-1/2} \|y_i\|_F^{2}
+		\end{split}
+	\end{equation}
+	
+	The regularization term $|U_j|^{-1/2}$ and $|I_u|^{-1/2}$ are weighted-$\lambda$-regularization approach from .We can then devise a gradient descent method for this minimum objective function. The second and third modification is essentially similar to the first one in structure and the formula is omitted here for brevity.
 	
 	% \section{Problems with Matrix Factorization Method}
+	
+	\subsection{Current Research Trends}
+	\subsubsection{User Demographic Information}
+	
+	
+	\subsubsection{Large-scale System Implementation}
+	
+	\section{Comparison and Discussion of SVD-Based Framework}
+	
+
+	\begin{table}
+		\centering
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline
+			Technique & Explicit Rating & Implicit Rating & Data Imputation & Biases Used & Regularization \\ \hline
+			SVD-CF & $\checkmark$ &  & $\checkmark$ &  &  \\ \hline
+			RSVD-CF & $\checkmark$ &  & &  & $\checkmark$ \\ \hline
+			SVD++ & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
+		\end{tabular}
+		\caption{Comparison of SVD Based Techniques\cite{review}}
+		\label{comparison}
+	\end{table}
+	
 	
 	\section{Experiment}
 	similarity
@@ -205,5 +281,4 @@
 
 	\bibliographystyle{plain}
 	\bibliography{reference.bib}
-	\end{multicols}
 \end{document}
