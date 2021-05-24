@@ -54,40 +54,13 @@
 	
 	
 	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches \cite{korenFactorization}. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++, iterative SVD, and more \cite{gower} \cite{SVD++performance} \cite{contextual} \cite{korenFactorization}. 
-	
-	\section{Rationale behind Collaborative Filtering Recommender System}
-	\subsection{User-item Interaction}
-	Matrix factorization models represents the user-item interaction in a latent joint space \cite{MFinRS}. Each item $i$ is associated with a vector $q_i \in \mathbb{R}^f$ and user $u$ is associated with a vector $p_u \in \mathbb{R}^f$. The rationale behind such representation is: item $i$ will possess some unknown factors in a measure, positive or negative, stored in entries of $q_i$, and user will have different favors toward these factors, and such interest is represented as entries in $p_u$. Therefore, we can take inner product to get an approximate of the user $u$'s rating on item $i$ as \cite{MFinRS} 
-	\begin{equation}
-		\hat{r}_{ui} = q_i^T  p_u 
-	\end{equation}
-	
-	Conventional SVD suffers from an incomplete (or even sparse) rating matrix. Researchers often resort to imputation to fill in the matrix, or through regularized least squared model as \cite{MFinRS}.
-	\begin{equation}
-		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u)^2 + \lambda(\|q_i\|^2 + \|p_u\|^2)
-	\end{equation}
-	in which $\kappa$ is the set of known ratings. The regularizing term $\|q_i\|^2 + \|p_u\|^2$ controls the magnitude of $q_i$ and $p_u$ to avoid overfitting.
-	
-	\subsection{Bias}
-	Early recommender system exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggested, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
-	\begin{equation}
-		b_{ui} = \mu + b_i + b_u
-	\end{equation}
-	in which $b_{ui}$ is the bias and $\mu$ is the overall average rating of training data, and $b_u, b_i$ are user $u$ and item $i$'s average ratings compared to the overall average rating \cite{MFinRS}. We can transform our estimated rating as 
-	\begin{equation}
-		\hat{r}_{ui} = b_{ui} + q_i^T  p_u 
-	\end{equation}
-	
-	and the objective becomes
-	\begin{equation}
-		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u - b_{ui})^2 + \lambda(\|q_i\|^2 + \|p_u\|^2 + b_u^2 + b_i^2)
-	\end{equation}
+		
+	% some intro to CF
 	
 	
 	\section{SVD-Based CF Methods}
-	\subsection{Standard SVD-CF Model}
-
-	SVD, as a common dimension reduction tool, originally used in information retrieval to identify latent semantic factor (as Latent Semantic Indexing), can represent the user-item interactions in a low dimensional space \cite{MFinRS} \cite{ApplySVD}. SVD approximates a matrix $A \in \mathbb{R}^{m \times n}$ in a form as 
+	\subsection{Intro to SVD}
+		SVD, as a common dimension reduction tool, originally used in information retrieval to identify latent semantic factor (as Latent Semantic Indexing), can represent the user-item interactions in a low dimensional space \cite{MFinRS} \cite{ApplySVD}. SVD approximates a matrix $A \in \mathbb{R}^{m \times n}$ in a form as 
 	\begin{equation}
 		A = U \Sigma V^T
 	\end{equation}
@@ -98,11 +71,11 @@
 		
 		\item 
 		The first $r$ columns of orthogonal matrix $U$ are eigenvectors of $A\,A^T$ and span the column space of $A$.
-			
+		
 		\item
 		The first $r$ columns of orthogonal matrix $V$ are eigenvectors of $A^T\,A$ and span the row space of $A$.
 	\end{itemize}
-
+	
 	People usually takes the best rank-$k$ approximation of matrix $A$ as 
 	\begin{equation} \label{trun-SVD}
 		A_k = U_k \Sigma_k V_k^T
@@ -110,6 +83,7 @@
 	
 	with $U_k \in \mathbb{R}^{m \times k}, \ \Sigma_k \in \mathbb{R}^{k \times k}, \ V_k \in \mathbb{R}^{k \times n}$.
 	
+	\subsection{Standard SVD-Based Neighborhood Approach of Collaborative Filtering}	
 	We will take a rating matrix $R$ with users $u_1, u_2, ... u_i$ in the row and items $i_1, i_2, ... i_j$ in the column, and the entry $R_{ij}$ is the estimated interest of user $u_i$ on item $i_j$. \cite{MFinRS} \cite{CF-IterPCA} \cite{ApplySVD}.
 	
 	Notice that matrix $R$ is often sparse and require some prepossessing. A common prepossessing approach is to take the row averages to replace all of the missing values in the matrix $R$ and normalize $R$ by subtracting row averages \cite{ApplySVD} \cite{CF-IterPCA}.
@@ -172,12 +146,56 @@
 		\item Prediction Rating Process \& Recommendation:
 		calculate the correlation and finally provide a recommendation
 	\end{enumerate}
-	 
-	This framework more applies to neighborhood approach. Some researchers are also interested in the framework of "latent semantic model". Jallouli et al. developed another framework for latent factor model \cite{latentFactor-RS} as follows
+	
+	\subsection{Standard SVD-Based Latent Factor Approach of Collaborative Filtering} 
+	The previous framework more applies to neighborhood approach. Some researchers are also interested in the framework of "latent semantic model". 
+	
+	\subsubsection{User-item Interaction in Latent Factor Space}
+	Matrix factorization models represents the user-item interaction in a latent joint space \cite{MFinRS}. Each item $i$ is associated with a vector $q_i \in \mathbb{R}^f$ and user $u$ is associated with a vector $p_u \in \mathbb{R}^f$. The rationale behind such representation is: item $i$ will possess some unknown factors in a measure, positive or negative, stored in entries of $q_i$, and user will have different favors toward these factors, and such interest is represented as entries in $p_u$. Therefore, we can take inner product to get an approximate of the user $u$'s rating on item $i$ as \cite{MFinRS} 
+	\begin{equation}
+		\hat{r}_{ui} = q_i^T  p_u 
+	\end{equation}
+	
+	The latent factor model tries to minimize the prediction error in some metrics. Conventional evaluation metrics includes root mean squared error (RMSE) and mean absolute error (MAE). Researchers usually minimize a function $\mathcal{L}$ to obtain prediction. (Stochastic) Gradient descent will be applied if the problem is convex, or if nonconvex requires other efforts to gain the global optimal solution such as Zheng et al. show \cite{RSVD}.
+	
+	
+	Conventional SVD suffers from an incomplete (or even sparse) rating matrix. Researchers often resort to imputation to fill in the matrix, or through regularized least squared model as \cite{MFinRS}.
+	\begin{equation}
+		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u)^2 + \lambda(\|q_i\|^2 + \|p_u\|^2)
+	\end{equation}
+	in which $\kappa$ is the set of known ratings. The regularizing term $\|q_i\|^2 + \|p_u\|^2$ controls the magnitude of $q_i$ and $p_u$ to avoid overfitting.
+	
+	\subsubsection{Bias}
+	Early recommender system exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggested, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
+	\begin{equation}
+		b_{ui} = \mu + b_i + b_u
+	\end{equation}
+	in which $b_{ui}$ is the bias and $\mu$ is the overall average rating of training data, and $b_u, b_i$ are user $u$ and item $i$'s average ratings compared to the overall average rating \cite{MFinRS}. We can transform our estimated rating as 
+	\begin{equation}
+		\hat{r}_{ui} = b_{ui} + q_i^T  p_u 
+	\end{equation}
+	
+	and the objective becomes
+	\begin{equation}
+		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u - b_{ui})^2 + \lambda(\|q_i\|^2 + \|p_u\|^2 + b_u^2 + b_i^2)
+	\end{equation}
+	
+	Jallouli et al. develop a framework for latent factor model \cite{latentFactor-RS} as follows
 	
 	\begin{enumerate}
-		\item define decomposition model
+		\item define decomposition model for rating matrix $R$
 		
+		\begin{itemize}
+			\item $ R \leftarrow P * Q $ 
+			
+			$P$ represents preference of users in some latent factors and $Q$ shows items attributes scores in the same factor space.
+			
+			\item $ R \leftarrow P * Q * C$
+			
+			$P\ Q$ remains the same and $C$ is the matrix for context (which will be discussed later)
+		\end{itemize}
+		
+
 		
 		\item define decision function
 		

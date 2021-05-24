@@ -116,4 +116,10 @@ Manolis Vozalis, Angelos Markos, and Konstantinos Margaritis.
 Manolis~G Vozalis and Konstantinos~G Margaritis.
 \newblock Applying svd on generalized item-based filtering.
 
+\bibitem{RSVD}
+Shuai Zheng, Chris Ding, and Feiping Nie.
+\newblock Regularized singular value decomposition and application to
+  recommender system.
+\newblock {\em arXiv preprint arXiv:1804.05090}, 2018.
+
 \end{thebibliography}

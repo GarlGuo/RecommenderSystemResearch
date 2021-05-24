@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  24 MAY 2021 12:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  24 MAY 2021 16:17
 entering extended mode
 **./main.tex
 (main.tex
@@ -438,56 +438,56 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 37.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 60.
+(Font)              <10.95> on input line 63.
  [1
 
 {C:/Users/Wentao/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 9
-7.
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 7
+0.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [2] [3]
+) [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 163.
+(Font)              <9> on input line 137.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 163.
+(Font)              <5> on input line 137.
 
-Overfull \hbox (17.0412pt too wide) in paragraph at lines 172--174
+Overfull \hbox (17.0412pt too wide) in paragraph at lines 146--148
 []\T1/lmr/m/n/10.95 Prediction Rating Process & Recommendation: calculate the c
 orrelation and finally provide a recommendation 
  []
 
-[4] [5] (main.bbl [6]) [7] (main.aux) ) 
+[3] [4] [5] (main.bbl [6] [7]) [8] (main.aux) ) 
 Here is how much of TeX's memory you used:
- 5590 strings out of 479799
- 77735 string characters out of 2879552
- 385494 words of memory out of 3000000
- 22495 multiletter control sequences out of 15000+200000
+ 5591 strings out of 479799
+ 77741 string characters out of 2879552
+ 383499 words of memory out of 3000000
+ 22496 multiletter control sequences out of 15000+200000
  594273 words of font info for 73 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,17n,72p,672b,262s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/MiKTeX/fonts/enc/dvips
-/lm/lm-ec.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program
- Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX/fonts/e
-nc/dvips/lm/lm-ts1.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
-c}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}<C:/Program Files/M
-iKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
-lic/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:
-/Program Files/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program Files/MiKTeX
-/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm
-/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Program
- Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/fonts/ty
-pe1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr6.pfb
-><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/MiKT
-eX/fonts/type1/public/lm/lmr9.pfb><C:/Program Files/MiKTeX/fonts/type1/public/l
-m/lmri10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Prog
-ram Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/MiKTeX/fonts
-/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/fonts/type1/
-public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (7 pages, 304450 bytes).
+{C:/Program Files/MiKTeX/fonts/e
+nc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:
+/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/MiKTeX
+/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/l
+m-ts1.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}<C:/Program
+ Files/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Program Files/MiKTeX/fonts/t
+ype1/public/lm/lmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmex10
+.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Program File
+s/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/MiKTeX/fonts/type1/p
+ublic/lm/lmmi8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Program Files/MiKTeX/
+fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/
+lmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Fi
+les/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Program Files/MiKTeX/fonts/type1/
+public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy10.pfb>
+<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/MiKT
+eX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/MiKTeX/font
+s/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (8 pages, 308184 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
+ 111 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
