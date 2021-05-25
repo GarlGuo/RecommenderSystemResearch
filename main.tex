@@ -167,7 +167,7 @@
 	\end{equation}
 	in which $\kappa$ is the set of known ratings. The regularizing term $\|q_i\|^2 + \|p_u\|^2$ controls the magnitude of $q_i$ and $p_u$ to avoid overfitting.
 	
-	\subsubsection{Bias}
+	\subsubsection{Adjusting Latent Factor Model - Bias}
 	Early recommender system exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggested, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
 	\begin{equation}
 		b_{ui} = \mu + b_i + b_u
@@ -194,7 +194,7 @@
 			
 			\item $ R \leftarrow P * Q * C$
 			
-			$P\ Q$ remains the same and $C$ is the matrix for context (which will be discussed later)
+			$P\ Q$ remains the same and $C$ is the matrix for context.
 		\end{itemize}
 		
 		\item define decision function
@@ -242,11 +242,10 @@
 		\caption{Update Main Body of SVD with Lasso (L1) Regularization\cite{RSVD-News}}
 		\label{L1}
 		\begin{algorithmic}
-			\STATE $e_{ui} = r_{ui} - p_u q_i^T$
 			\IF{$p_u \geq 0$}
 				\STATE $p_u \pluseq \gamma (e_{ui} q_j - \lambda \alpha - \lambda p_u ( 1 - \alpha))$
 			\ELSE
-				\STATE $p_u \pluseq \gamma (e_{ui} q_j + \lambda \alpha - \lambda p_u ( 1 - \alpha))$			
+				\STATE $p_u \pluseq \gamma (e_{ui} q_j + \lambda \alpha - \lambda p_u ( 1 - \alpha))$
 			\ENDIF
 			
 			\IF{$q_i \geq 0$}
@@ -258,13 +257,37 @@
 	\end{algorithm}
 
 	An ALS implementation of SVD with ridge (L2) regularization is provided by Zheng et al. \cite{RSVD}.
+	
+	\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+	
+	\begin{algorithm}
+		\caption{ALS of SVD with Ridge (L2) Regularization\cite{RSVD}}
+		\label{L1}
+		\begin{algorithmic}
+			\REQUIRE{rating matrix $R$, rank $k$, regularization weight $\lambda$}
+			\STATE $L = \| R - P Q^T \|_F^2 + \lambda \| P \|_F^2 + \lambda \| Q \|_F^2$
+			\STATE initialize $Q$ with some random values
+			\REPEAT
+				\STATE $ P = R Q(Q^TQ + \lambda I)^{-1} $
+				\STATE $ Q = R^T P(P^T P + \lambda I)^{-1} $
+			\UNTIL{$L$ converges} 
+		\end{algorithmic}
+	\end{algorithm}
+
+	Zheng et al. \cite{RSVD} have proven that RSVD is still in SVD subspace and it converges generally faster than standard SVD approach. The RSVD objective function is not convex (RSVD is actually biconvex), but it still has a global optimal solution that can be obtained as the global optimal solution as a closed form \cite{RSVD}.
+	
+	Besides L1 and L2 regularization techniques, scholars also have interests on .
+	
+	% kernelized and weighted-lambda-regularization goes here
+
+
 
 	\subsection{SVD++ Model}
 	
 	The traditional SVD method only considers users' explicit ratings but do not take implicit data into account. Although implicit data (mouse move, reading time, etc.) might not be publicly available, there is one kind of implicit data always available: whether a user rates on an item (rate vs. not rate). 
 	
 	
-	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown below 
+	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown in equation \ref{SVD++}. 
 	
 	\begin{equation} \label{SVD++}
 		\begin{split}
@@ -288,6 +311,15 @@
 	\end{itemize}
 	
 	The remaining terms form the final tier, or "neighborhood tier" called by Koren \cite{korenFactorization}, as it contributes some adjustments to the profile.
+	
+	The algorithm of SVD++ is shown in figure \ref{SVD++-Algo}.
+	
+	\begin{figure}[h]
+		\centering
+		\caption{SVD++ Algorithm}
+		\label{SVD++-Algo}
+		\includegraphics[width=9.5cm, height=9.5cm]{SVD++.png}
+	\end{figure}
 	
 	The entire SVD++ model usually begins with standard SVD decomposition and calculation of similarity measure as mentioned before. After forming $S^k(i)$, a gradient descent algorithm will be applied to get predicted rating from equation \ref{SVD++}, as developed by Koren et al\cite{koren2010}.  
 	
@@ -321,7 +353,8 @@
 	\subsubsection{Large-scale System Implementation}
 	
 	\section{Comparison and Discussion of SVD-Based Framework}
-	
+
+
 
 	\begin{table}
 		\centering
@@ -338,7 +371,7 @@
 	
 	
 	\section{Experiment}
-	similarity
+	% some data goes here	
 	
 	
 	\section{Conclusion}

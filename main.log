@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  24 MAY 2021 18:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  25 MAY 2021 21:51
 entering extended mode
 **./main.tex
 (main.tex
@@ -383,7 +383,11 @@ nment
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count292
 \l__pdf_internal_box=\box101
-) (main.aux)
+) (main.aux
+
+LaTeX Warning: Label `L1' multiply defined.
+
+)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
@@ -400,6 +404,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -531,37 +536,50 @@ LaTeX Font Info:    Trying to load font information for T1+lmss on input line 2
 35.
  ("C:\Program Files\MiKTeX\tex/latex/lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [5 <./Latent-factor-Framework1.png>] [6] (main.bbl [7] [8]) [9] (main.aux) ) 
+) [5 <./Latent-factor-Framework1.png>]
+<SVD++.png, id=39, 383.031pt x 369.7815pt>
+File: SVD++.png Graphic file (type png)
+<use SVD++.png>
+Package pdftex.def Info: SVD++.png  used on input line 321.
+(pdftex.def)             Requested size: 270.31743pt x 270.32191pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6] [7 <./SVD++.png>] (main.bbl [8]) [9] (main.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6599 strings out of 479799
- 91359 string characters out of 2879552
- 398684 words of memory out of 3000000
- 23461 multiletter control sequences out of 15000+200000
+ 6606 strings out of 479799
+ 91444 string characters out of 2879552
+ 400731 words of memory out of 3000000
+ 23467 multiletter control sequences out of 15000+200000
  597044 words of font info for 74 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,20n,72p,672b,438s stack positions out of 5000i,500n,10000p,200000b,50000s
-{
-C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTeX/f
-onts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-math
-it.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Fi
-les/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files/MiKTeX/fonts/enc/dvi
-ps/lm/lm-mathsy.enc}<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><
-C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/MiKT
-eX/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/public
-/lm/lmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Pro
-gram Files/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX/font
-s/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr1
-2.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Program File
-s/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX/fonts/type1/pu
-blic/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Pr
-ogram Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX/fo
-nts/type1/public/lm/lmss8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lm
-sy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program F
-iles/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/Mi
-KTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (9 pages, 344822 bytes).
+{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/MiKTe
+X/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-m
+athit.enc}{C:/Program Files/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program
+ Files/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files/MiKTeX/fonts/enc/
+dvips/lm/lm-mathsy.enc}<C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx10.pf
+b><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/M
+iKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Program Files/MiKTeX/fonts/type1/pub
+lic/lm/lmmi10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/
+Program Files/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program Files/MiKTeX/f
+onts/type1/public/lm/lmr10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/l
+mr12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Program F
+iles/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/MiKTeX/fonts/type1
+/public/lm/lmr8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:
+/Program Files/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Program Files/MiKTeX
+/fonts/type1/public/lm/lmss8.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm
+/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Progra
+m Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files
+/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (9 pages, 480615 bytes).
 PDF statistics:
- 121 PDF objects out of 1000 (max. 8388607)
+ 123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
