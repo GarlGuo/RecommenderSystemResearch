@@ -29,6 +29,13 @@ Dheeraj Bokde, Sheetal Girase, and Debajyoti Mukhopadhyay.
 Stephen Gower.
 \newblock Netflix prize and svd, 2014.
 
+\bibitem{R-Model}
+Guibing Guo, Jie Zhang, and Neil Yorke-Smith.
+\newblock A novel recommendation model regularized with user trust and item
+  ratings.
+\newblock {\em IEEE Transactions on Knowledge and Data Engineering},
+  28(7):1607--1620, 2016.
+
 \bibitem{sim}
 Lin Guo and Qin~Ke Peng.
 \newblock A combinative similarity computing measure for collaborative
@@ -62,6 +69,12 @@ Yancheng Jia, Changhua Zhang, Qinghua Lu, and Peng Wang.
 \newblock Users' brands preference based on svd++ in recommender systems.
 \newblock In {\em 2014 ieee workshop on advanced research and technology in
   industry applications (wartia)}, pages 1175--1178. IEEE, 2014.
+
+\bibitem{tensor}
+Alexandros Karatzoglou, Xavier Amatriain, Linas Baltrunas, and Nuria Oliver.
+\newblock Multiverse recommendation: N-dimensional tensor factorization for
+  context-aware collaborative filtering.
+\newblock pages 79--86, 01 2010.
 
 \bibitem{CF-IterPCA}
 Dohyun Kim and Bong-Jin Yum.
@@ -99,6 +112,12 @@ Haifeng Liu, Zheng Hu, Ahmad Mian, Hui Tian, and Xuzhen Zhu.
   filtering.
 \newblock {\em Knowledge-Based Systems}, 56:156--166, 2014.
 
+\bibitem{Kernel-MF}
+Xinyue Liu, Chara Aggarwal, Yu-Feng Li, Xiaugnan Kong, Xinyuan Sun, and Saket
+  Sathe.
+\newblock Kernelized matrix factorization for collaborative filtering.
+\newblock pages 378--386, 06 2016.
+
 \bibitem{review}
 Rachana Mehta and Keyur Rana.
 \newblock A review on matrix factorization techniques in recommender systems.
@@ -128,5 +147,12 @@ Shuai Zheng, Chris Ding, and Feiping Nie.
 \newblock Regularized singular value decomposition and application to
   recommender system.
 \newblock {\em arXiv preprint arXiv:1804.05090}, 2018.
+
+\bibitem{weighted-lambda-old}
+Yunhong Zhou, Dennis Wilkinson, Robert Schreiber, and Rong Pan.
+\newblock Large-scale parallel collaborative filtering for the netflix prize.
+\newblock In Rudolf Fleischer and Jinhui Xu, editors, {\em Algorithmic Aspects
+  in Information and Management}, pages 337--348, Berlin, Heidelberg, 2008.
+  Springer Berlin Heidelberg.
 
 \end{thebibliography}

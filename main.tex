@@ -158,16 +158,20 @@
 		\hat{r}_{ui} = q_i^T  p_u 
 	\end{equation}
 	
-	The latent factor model tries to minimize the prediction error in some metrics. Conventional evaluation metrics includes root mean squared error (RMSE) and mean absolute error (MAE). Researchers usually minimize a function $\mathcal{L}$ to obtain prediction. (Stochastic) Gradient descent will be applied if the problem is convex, or if nonconvex requires other efforts to gain the global optimal solution such as Zheng et al. show \cite{RSVD}.
+	
+	Although latent factor model in matrix factorization method is not directly involved with SVD (as it does not explicitly computes $U \Sigma V$), researchers often dub the name "SVD" since 1) SVD generates the minimum of $R - \hat{R}$ in Frobenius norm with $\hat{R}$ rank $k$ and the objective of latent factor model is often $\min R - P Q$ and 2) the idea of matrix factorization is to represent $R$ in a product of low rank matrix of latent factors as $P$ (user matrix) and $Q$ (item matrix), which is similar to the idea of SVD on decomposing a large matrix into low rank matrices. 
+	
+	The latent factor model tries to minimize the prediction error in some metrics. Conventional evaluation metrics includes root mean squared error (RMSE) and mean absolute error (MAE). Researchers usually minimize an objective function $\mathcal{L}$ to obtain prediction. (Stochastic) gradient descent will be applied if the problem is convex, or if in the case of biconvex alternating least square (ALS) will be applied such as what Zheng et al. show \cite{RSVD}.
 	
 	
-	Conventional SVD suffers from an incomplete (or even sparse) rating matrix. Researchers often resort to imputation to fill in the matrix, or through regularized least squared model as \cite{MFinRS}.
+	Conventional SVD suffers from an incomplete (or even sparse) rating matrix. Researchers often resort to data imputation to fill in the matrix, or through regularized least squared model as \cite{MFinRS}.
 	\begin{equation}
 		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u)^2 + \lambda(\|q_i\|^2 + \|p_u\|^2)
 	\end{equation}
 	in which $\kappa$ is the set of known ratings. The regularizing term $\|q_i\|^2 + \|p_u\|^2$ controls the magnitude of $q_i$ and $p_u$ to avoid overfitting.
 	
-	\subsubsection{Adjusting Latent Factor Model - Bias}
+	 
+	\subsubsection{Adding Bias to Latent Factor Model}
 	Early recommender system exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggested, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
 	\begin{equation}
 		b_{ui} = \mu + b_i + b_u
@@ -223,23 +227,27 @@
 
 	\subsection{Regularized SVD Model}
 
+	\subsubsection{Standard L1/L2 Regularization}
+
 	\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
 	\newcommand{\pluseq}{\mathrel{+}=}
 
-	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is
-	\begin{equation}
-		\begin{split}
-			e_{ui}\ \myeq&\ r_{ui} - q_i^T p_u \\
-			q_i\ \pluseq&\ \gamma (e_{ui} * p_u - \lambda * q_i) \\
-			p_u\ \pluseq&\ \gamma (e_{ui} * q_i - \lambda * p_u)
-		\end{split}
-	\end{equation}
+	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is shown in Algorithm \ref{L2}
+	\begin{algorithm}
+		\caption{Simon Funk's Update Body with Ridge (L2) Regularization\cite{MFinRS}}
+		\label{L2}
+		\begin{algorithmic}
+			\STATE $e_{ui} = \ r_{ui} - q_i^T p_u$
+			\STATE $q_i\ \pluseq \gamma (e_{ui} * p_u - \lambda * q_i)$
+			\STATE $p_u\ \pluseq \gamma (e_{ui} * q_i - \lambda * p_u)$
+		\end{algorithmic}
+	\end{algorithm}
 
 	The original purpose of regularization terms is to avoid overfitting and common approach includes lasso and ridge (or L1 L2) regularization \cite{RSVD-News}, as shown in Algorithm \ref{L1}.
 	
 	\floatname{algorithm}{Algorithm}
 	\begin{algorithm}
-		\caption{Update Main Body of SVD with Lasso (L1) Regularization\cite{RSVD-News}}
+		\caption{Ji et al. Looping Update Body with Lasso (L1) Regularization\cite{RSVD-News}}
 		\label{L1}
 		\begin{algorithmic}
 			\IF{$p_u \geq 0$}
@@ -261,7 +269,7 @@
 	\renewcommand{\algorithmicrequire}{\textbf{Input:}}
 	
 	\begin{algorithm}
-		\caption{ALS of SVD with Ridge (L2) Regularization\cite{RSVD}}
+		\caption{Regularized ALS Suggested by Zheng et al.\cite{RSVD}}
 		\label{L1}
 		\begin{algorithmic}
 			\REQUIRE{rating matrix $R$, rank $k$, regularization weight $\lambda$}
@@ -276,11 +284,20 @@
 
 	Zheng et al. \cite{RSVD} have proven that RSVD is still in SVD subspace and it converges generally faster than standard SVD approach. The RSVD objective function is not convex (RSVD is actually biconvex), but it still has a global optimal solution that can be obtained as the global optimal solution as a closed form \cite{RSVD}.
 	
-	Besides L1 and L2 regularization techniques, scholars also have interests on .
+	\subsubsection{Weighted-$\lambda$-Regularization}
+	Besides L1 and L2 regularization techniques, scholars also have interests on weighted-$\lambda$-regularization, as proposed by Zhou et al. \cite{weighted-lambda-old} and the regularization term is shown in equation \ref{eqn:weighted-lambda}. The rationale behind such regularization is to penalize items or users that have more ratings and to give a chance for new users or items, as a potential solution to cold-start issue of collaborative filtering. Notice that $I_u$ means the set of all items user $u$ has rated and $U_i$ is the set of all users that rate item $i$.
 	
-	% kernelized and weighted-lambda-regularization goes here
-
-
+	\begin{equation}
+		\label{eqn:weighted-lambda}
+		\lambda (\sum_u |I_u| \|p_u\|^2 + \sum_i |U_i| \|q_i\|^2)
+	\end{equation}
+	
+	Weighted-$\lambda$-regularization is then modified by Guo et al. \cite{R-Model} to less penalized popular items/users and more regularize cold-start users and niche items as $\|I_u\|^{-.5}$ and $\|U_i\|^{-.5}$ as shown in equation \ref{eqn:modified-weighted-lambda} and such idea is further used in extended SVD++ model by Jallouli et al. \cite{contextual}.
+	
+	\begin{equation}
+		\label{eqn:modified-weighted-lambda}
+		\lambda (\sum_u \|I_u\|^{-.5} \|p_u\|^2 + \sum_i \|U_i\|^{-.5} \|q_i\|^2)
+	\end{equation}
 
 	\subsection{SVD++ Model}
 	
@@ -290,6 +307,7 @@
 	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown in equation \ref{SVD++}. 
 	
 	\begin{equation} \label{SVD++}
+		\tag*{SVD++ Model in Three-Tier}
 		\begin{split}
 			\hat{r}_{ui} =& \ \mu + b_i + b_u \\ 
 			& + q_i^T  (p_u + |N_u|^{-1/2} \sum_{j \in N_u}y_j) \\ 
@@ -335,6 +353,7 @@
 	The minimum objective function is presented as follows:
 	
 	\begin{equation}
+		\tag*{First Modification of SVD++ by Jallouli et al. \cite{contextual}}
 		\begin{split}
 			\mathcal{L} = &\ \dfrac{1}{2} \sum_{(u, j)} (\hat{r_{uj}} - r_{uj})^2 + \dfrac{\lambda}{2} \sum_{u \in U_j} |I_u|^{-1/2} b_u^2 + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_j|^{-1/2} b_j^2 \\
 			& + \dfrac{\lambda}{2} \sum_{u \in U_j} |I_u|^{-1/2} \|p_u\|_F^{2} + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_j|^{-1/2} \|q_j\|_F^{2} \\
@@ -342,15 +361,23 @@
 		\end{split}
 	\end{equation}
 	
-	The regularization term $|U_j|^{-1/2}$ and $|I_u|^{-1/2}$ are weighted-$\lambda$-regularization approach. We can then devise a gradient descent method for this minimum objective function. The second and third modification is essentially similar to the first one in structure and the formula is omitted here for brevity.
+	Notice that the regularization term $|U_j|^{-1/2}$ and $|I_u|^{-1/2}$ are weighted-$\lambda$-regularization approach mentioned before. We can then devise a gradient descent method for this minimum objective function. The second and third modification is essentially similar to the first one in structure and the formula are omitted here for brevity.
 	
 	% \section{Problems with Matrix Factorization Method}
 	
 	\subsection{Current Research Trends}
-	\subsubsection{User Demographic Information}
+	Since 2010s, researchers have proposed various models built on standard collaborative filtering framework. A current modern modification is "context", as suggested before, in which researchers add terms to $p_u$ $q_i$ terms to represent "trust", an abstraction of user-user social interaction that influence user ratings. Some researchers even represent the latent factors in Hilbert Feature Space and play the "kernel trick" \cite{Kernel-MF} but this is beyond the scope of this paper.
+	
+	\subsubsection{Social Information}
 	
 	
-	\subsubsection{Large-scale System Implementation}
+	\subsubsection{Tensor Decomposition - Higher Order SVD}
+	\begin{figure}
+		\includegraphics{tensor.png}
+	\end{figure}te{tensor}
+	
+	
+	\subsubsection{Stochastic Model}
 	
 	\section{Comparison and Discussion of SVD-Based Framework}
 
@@ -368,10 +395,6 @@
 		\caption{Comparison of SVD Based Techniques\cite{review}}
 		\label{comparison}
 	\end{table}
-	
-	
-	\section{Experiment}
-	% some data goes here	
 	
 	
 	\section{Conclusion}

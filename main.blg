@@ -9,47 +9,49 @@ I was expecting a `,' or a `}'---line 1 of file reference.bib
  : @article{RS 
  :             survey,
 I'm skipping whatever remains of this entry
+Warning--empty booktitle in tensor
+Warning--empty booktitle in Kernel-MF
 Warning--empty journal in ApplySVD
 Warning--empty year in ApplySVD
-You've used 21 entries,
+You've used 25 entries,
             2118 wiz_defined-function locations,
-            636 strings with 7835 characters,
-and the built_in function-call counts, 8246 in all, are:
-= -- 852
-> -- 349
-< -- 13
-+ -- 142
-- -- 116
-* -- 542
-:= -- 1283
-add.period$ -- 70
-call.type$ -- 21
-change.case$ -- 120
+            663 strings with 8779 characters,
+and the built_in function-call counts, 10206 in all, are:
+= -- 1039
+> -- 454
+< -- 16
++ -- 183
+- -- 152
+* -- 686
+:= -- 1583
+add.period$ -- 83
+call.type$ -- 25
+change.case$ -- 149
 chr.to.int$ -- 0
-cite$ -- 23
-duplicate$ -- 342
-empty$ -- 653
-format.name$ -- 116
-if$ -- 1805
+cite$ -- 29
+duplicate$ -- 418
+empty$ -- 797
+format.name$ -- 152
+if$ -- 2235
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 20
-newline$ -- 106
-num.names$ -- 42
-pop$ -- 144
+int.to.str$ -- 25
+missing$ -- 24
+newline$ -- 126
+num.names$ -- 52
+pop$ -- 181
 preamble$ -- 1
-purify$ -- 99
+purify$ -- 124
 quote$ -- 0
-skip$ -- 258
+skip$ -- 321
 stack$ -- 0
-substring$ -- 544
-swap$ -- 119
-text.length$ -- 13
+substring$ -- 672
+swap$ -- 148
+text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 84
-warning$ -- 2
-while$ -- 87
-width$ -- 23
-write$ -- 236
+type$ -- 100
+warning$ -- 4
+while$ -- 104
+width$ -- 27
+write$ -- 280
 (There was 1 error message)
