@@ -231,7 +231,7 @@
 
 	\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
 	\newcommand{\pluseq}{\mathrel{+}=}
-
+	\newcommand{\minuseq}{\mathrel{-}=}
 	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is shown in Algorithm \ref{L2}
 	\begin{algorithm}
 		\caption{Simon Funk's Update Body with Ridge (L2) Regularization\cite{MFinRS}}
@@ -248,7 +248,7 @@
 	\floatname{algorithm}{Algorithm}
 	\begin{algorithm}
 		\caption{Ji et al. Looping Update Body with Lasso (L1) Regularization\cite{RSVD-News}}
-		\label{L1}
+		\label{alg:L1}
 		\begin{algorithmic}
 			\IF{$p_u \geq 0$}
 				\STATE $p_u \pluseq \gamma (e_{ui} q_j - \lambda \alpha - \lambda p_u ( 1 - \alpha))$
@@ -307,7 +307,7 @@
 	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown in equation \ref{SVD++}. 
 	
 	\begin{equation} \label{SVD++}
-		\tag*{SVD++ Model in Three-Tier}
+		\tag*{SVD++ Model in Three-Tier \cite{korenFactorization}}
 		\begin{split}
 			\hat{r}_{ui} =& \ \mu + b_i + b_u \\ 
 			& + q_i^T  (p_u + |N_u|^{-1/2} \sum_{j \in N_u}y_j) \\ 
@@ -370,20 +370,67 @@
 	
 	\subsubsection{Social Information}
 	
+	Some researchers are also interested in utilizing social network information to predict ratings \cite{social-regularization} \cite{review}.
 	
 	\subsubsection{Tensor Decomposition - Higher Order SVD}
-	\begin{figure}
+	Higher Order SVD (HOSVD) can be applied to context-based recommendation in the same way as other MF techniques \cite{tensor}. In HOSVD, the prediction model for tensor $R \in \mathbb{R}^{n * m * c}$ is shown in figure \ref{fig:tensor} and equation \ref{eqn:tensor} \cite{latentFactor-RS}. The minimum objective function $\mathcal{L}$ is shown in equation \ref{eqn:tensor-obj}.
+	
+	\begin{figure}\label{fig:tensor}
+		\centering
+		\caption{Illustration of HOSVD Model \cite{tensor}}
 		\includegraphics{tensor.png}
-	\end{figure}te{tensor}
+	\end{figure}
 	
+	\begin{equation}
+		\label{eqn:tensor}
+		\hat{R}_{uik} = S \times_P P_{u*} \times_Q Q_{i*} \times_C C_{k*}
+	\end{equation}
 	
-	\subsubsection{Stochastic Model}
+	\begin{equation}
+		\label{eqn:tensor-obj}
+		\mathcal{L} = \text{Loss}(R, \hat{R}) +  \Omega(P, Q, C) + \Omega(S)
+	\end{equation}
+	
+	Here are some notations: 
+	\begin{itemize}
+		\item $S\in \mathbb{R}^{d_P*d_Q*d_C}$ central tensor. $P \in \mathbb{R}^{n*d_P}$ user matrix. $Q \in \mathbb{R}^{m*d_Q}$ item matrix. $C\in \mathbb{R}^{c*d_C}$ context matrix. $R \in \mathbb{R}^{n * m * c}$ rating observations.
+		
+		\item $\Omega$ (L1/L2) regularization function.
+	\end{itemize}
+
+	Then, the factorization part is shown in Algorithm \ref{alg:tensor-alg}.
+	
+	\begin{algorithm}[h]
+		\caption{Tensor Factorization by Karatzoglou et al.\cite{tensor}}
+		\label{alg:tensor-alg}
+		\begin{algorithmic}
+			\REQUIRE{$S, P, Q, C$ are filled with random values}
+			\STATE $t = t_0$
+			\WHILE{$(u, i, k)$ in $R$}
+				\STATE $\eta = 1/\sqrt{t}$; $t \pluseq 1$; $l_t = \text{Loss}(R_{uik}, \hat{R}_{uik})$
+				\STATE $\hat{R}_{uik} = S \times_P P_{u*} \times_Q Q_{i*} \times_C C_{k*}$
+				
+				\STATE $\partial_{P_{u*}} \text{Loss} = \partial_{P_{u*}} (l_t\ S \times_Q Q_{i*} \times_C C_{k*})$
+				\STATE $\partial_{Q_{i*}} \text{Loss} = \partial_{P_{u*}} (l_t\ S \times_P P_{u*} \times_C C_{k*})$
+				\STATE $\partial_{C_{k*}} \text{Loss} = \partial_{P_{u*}} (l_t\ S \times_P P_{u*} \times_Q Q_{i*})$
+				\STATE $\partial_{S} \text{Loss} = \partial_{S} (l_t\ \bigotimes P_{u*} \bigotimes Q_{i*} \bigotimes C_{k*})$
+												
+				\STATE $P_{u*} \minuseq \eta(\lambda_P P_{u*} + \partial_{P_{u*}} \text{Loss})$
+				\STATE $Q_{i*} \minuseq \eta(\lambda_Q Q_{i*} + \partial_{Q_{i*}} \text{Loss})$
+				\STATE $C_{k*} \minuseq \eta(\lambda_C C_{k*} + \partial_{C_{k*}} \text{Loss})$
+				\STATE $S \minuseq \eta(\lambda_S S + \partial_{S} \text{Loss})$
+			\ENDWHILE
+		\end{algorithmic}
+	\end{algorithm}
+
+	Tang et al. also propose a HOSVD model for neighborhood approach in collaborative filtering \cite{tensor-neighbor} but this is beyond the scope of this paper.
+	
 	
 	\section{Comparison and Discussion of SVD-Based Framework}
 
 
 
-	\begin{table}
+	\begin{table}[h]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|}
 			\hline
@@ -391,6 +438,8 @@
 			SVD-CF & $\checkmark$ &  & $\checkmark$ &  &  \\ \hline
 			RSVD-CF & $\checkmark$ &  & &  & $\checkmark$ \\ \hline
 			SVD++ & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
+			TrustSVD & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
+			TimeSVD++ & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
 		\end{tabular}
 		\caption{Comparison of SVD Based Techniques\cite{review}}
 		\label{comparison}
