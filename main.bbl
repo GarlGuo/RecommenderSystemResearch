@@ -29,6 +29,11 @@ Dheeraj Bokde, Sheetal Girase, and Debajyoti Mukhopadhyay.
 Stephen Gower.
 \newblock Netflix prize and svd, 2014.
 
+\bibitem{TrustSVD}
+Guibing Guo, Jie Zhang, and Neil Yorke-Smith.
+\newblock Trustsvd: Collaborative filtering with both the explicit and implicit
+  influence of user trust and of item ratings, 2015.
+
 \bibitem{R-Model}
 Guibing Guo, Jie Zhang, and Neil Yorke-Smith.
 \newblock A novel recommendation model regularized with user trust and item
