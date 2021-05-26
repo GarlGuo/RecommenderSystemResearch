@@ -19,6 +19,12 @@ Jes{\'u}s Bobadilla, Antonio Hernando, Fernando Ortega, and Abraham
 \newblock Collaborative filtering based on significances.
 \newblock {\em Information Sciences}, 185(1):1--17, 2012.
 
+\bibitem{RSsurvey}
+Jes{\'u}s Bobadilla, Fernando Ortega, Antonio Hernando, and Abraham
+  Guti{\'e}rrez.
+\newblock Recommender systems survey.
+\newblock {\em Knowledge-based systems}, 46:109--132, 2013.
+
 \bibitem{MF-Model-Survey}
 Dheeraj Bokde, Sheetal Girase, and Debajyoti Mukhopadhyay.
 \newblock Matrix factorization model in collaborative filtering algorithms: A
@@ -166,6 +172,11 @@ Bo~Yang, Yu~Lei, Jiming Liu, and Wenjie Li.
 \newblock Social collaborative filtering by trust.
 \newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
   39(8):1633--1647, 2017.
+
+\bibitem{ISVD}
+Xiaofeng Yuan, Lixin Han, Subin Qian, Guoxia Xu, and Hong Yan.
+\newblock Singular value decomposition based recommendation using imputed data.
+\newblock {\em Knowledge-Based Systems}, 163:485--494, 2019.
 
 \bibitem{RSVD}
 Shuai Zheng, Chris Ding, and Feiping Nie.

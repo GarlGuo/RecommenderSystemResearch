@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  27 MAY 2021 02:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  27 MAY 2021 03:44
 entering extended mode
 **./main.tex
 (main.tex
@@ -520,36 +520,33 @@ orrelation and finally provide a recommendation
 <Latent-factor-Framework1.png, id=32, 284.262pt x 225.2415pt>
 File: Latent-factor-Framework1.png Graphic file (type png)
 <use Latent-factor-Framework1.png>
-Package pdftex.def Info: Latent-factor-Framework1.png  used on input line 219.
+Package pdftex.def Info: Latent-factor-Framework1.png  used on input line 220.
 (pdftex.def)             Requested size: 199.17288pt x 170.72133pt.
  [5 <./Latent-factor-Framework1.png>] [6]
 <SVD++.png, id=41, 383.031pt x 369.7815pt>
 File: SVD++.png Graphic file (type png)
 <use SVD++.png>
-Package pdftex.def Info: SVD++.png  used on input line 339.
-(pdftex.def)             Requested size: 270.31743pt x 270.32191pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[7] [8 <./SVD++.png>]
+Package pdftex.def Info: SVD++.png  used on input line 340.
+(pdftex.def)             Requested size: 256.09174pt x 256.09178pt.
+ [7 <./SVD++.png>] [8]
 <tensor.png, id=51, 283.65974pt x 163.812pt>
 File: tensor.png Graphic file (type png)
 <use tensor.png>
-Package pdftex.def Info: tensor.png  used on input line 424.
+Package pdftex.def Info: tensor.png  used on input line 426.
 (pdftex.def)             Requested size: 283.65904pt x 163.81158pt.
- [9] [10 <./tensor.png>] (main.bbl [11]
-Underfull \hbox (badness 3635) in paragraph at lines 79--83
+ [9]
+[10 <./tensor.png>] (main.bbl [11]
+Underfull \hbox (badness 3635) in paragraph at lines 85--89
 []\T1/lmr/m/n/10.95 Alexandros Karatzoglou, Xavier Amatriain, Linas Baltrunas, 
 and Nuria Oliver.  Multiverse
  []
 
 [12]) [13] (main.aux) ) 
 Here is how much of TeX's memory you used:
- 6598 strings out of 479799
- 91153 string characters out of 2879552
- 400922 words of memory out of 3000000
- 23462 multiletter control sequences out of 15000+200000
+ 6602 strings out of 479799
+ 91200 string characters out of 2879552
+ 400914 words of memory out of 3000000
+ 23466 multiletter control sequences out of 15000+200000
  594273 words of font info for 73 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,17n,72p,672b,438s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -572,7 +569,7 @@ fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm
 /lmsy6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program
  Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/
 MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (13 pages, 508533 bytes).
+Output written on main.pdf (13 pages, 510084 bytes).
 PDF statistics:
  142 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

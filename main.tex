@@ -212,9 +212,10 @@
 		
 		\item define model learning
 		
-		(Stochastic) Gradient descent generally applies here as follow. 
+		(Stochastic) gradient descent generally applies here as in Figure \ref{fig:generic}. 
 		\begin{figure}[h]
 			\caption{Generic Algorithm for Latent Factor Approach\cite{latentFactor-RS}}
+			\label{fig:generic}
 			\centering
 			\includegraphics[width=7cm, height=6cm]{Latent-factor-Framework1.png}
 		\end{figure}
@@ -232,10 +233,10 @@
 	\newcommand\myeq{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny\sffamily def}}}{=}}}
 	\newcommand{\pluseq}{\mathrel{+}=}
 	\newcommand{\minuseq}{\mathrel{-}=}
-	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is shown in Algorithm \ref{L2}
+	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is shown in Algorithm \ref{alg:L2}.
 	\begin{algorithm}
 		\caption{Simon Funk's Update Body with Ridge (L2) Regularization\cite{MFinRS}}
-		\label{L2}
+		\label{alg:L2}
 		\begin{algorithmic}
 			\STATE $e_{ui} = \ r_{ui} - q_i^T p_u$
 			\STATE $q_i\ \pluseq \gamma (e_{ui} * p_u - \lambda * q_i)$
@@ -243,7 +244,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 
-	The original purpose of regularization terms is to avoid overfitting and common approach includes lasso and ridge (or L1 L2) regularization \cite{RSVD-News}, as shown in Algorithm \ref{L1}.
+	The original purpose of regularization terms is to avoid overfitting and common approach includes lasso and ridge (or L1 L2) regularization \cite{RSVD-News}, as shown in Algorithm \ref{alg:L1}.
 	
 	\floatname{algorithm}{Algorithm}
 	\begin{algorithm}
@@ -307,7 +308,7 @@
 	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown in equation \ref{SVD++}. 
 	
 	\begin{equation} \label{SVD++}
-		\tag*{SVD++ Model in Three-Tier \cite{korenFactorization}}
+		\tag*{SVD++ Model in Three-Tier}
 		\begin{split}
 			\hat{r}_{ui} =& \ \mu + b_i + b_u \\ 
 			& + q_i^T  (p_u + |N_u|^{-1/2} \sum_{j \in N_u}y_j) \\ 
@@ -330,13 +331,13 @@
 	
 	The remaining terms form the final tier, or "neighborhood tier" called by Koren \cite{korenFactorization}, as it contributes some adjustments to the profile.
 	
-	The algorithm of SVD++ is shown in figure \ref{SVD++-Algo}.
+	The algorithm of SVD++ is shown in Figure \ref{SVD++-Algo}.
 	
-	\begin{figure}[h]
+	\begin{figure}[H]
 		\centering
 		\caption{SVD++ Algorithm}
 		\label{SVD++-Algo}
-		\includegraphics[width=9.5cm, height=9.5cm]{SVD++.png}
+		\includegraphics[width=9cm, height=9cm]{SVD++.png}
 	\end{figure}
 	
 	The entire SVD++ model usually begins with standard SVD decomposition and calculation of similarity measure as mentioned before. After forming $S^k(i)$, a gradient descent algorithm will be applied to get predicted rating from equation \ref{SVD++}, as developed by Koren et al\cite{koren2010}.  
@@ -344,7 +345,7 @@
 	SVD++ model arouses great research interests has been applied and tested in numerous dataset \cite{SVD++performance} \cite{korenFactorization} and it generally beats traditional SVD-CF model. However, the contribution of SVD++ is far more than an improvement in benchmark but a new field for exploration: context \cite{contextual}, or "any information that can be used to characterize the situation of entities" by Jallouli et al. Scholars then incorporate more contexts (trust, temporal dynamics, environmental information, etc.) into SVD++ method and developed methods like TrustMF, TimeSVD++, and more \cite{contextual} \cite{review}.
 	
 			
-	Jallouli et al., for instance, suggests three modifications to SVD++ model to include influence of previously preferred items, user-user social information, and environmental information \cite{contextual}. The first modification brings the following rating prediction function (notice the term $\sum_{i \in I_u} y_i$ as latent factors of previously preferred items):
+	Jallouli et al., for instance, suggests three modifications to SVD++ model to include influence of previously preferred items, user-user social information, and environmental information \cite{contextual}. The first modification brings the following rating prediction function ($\sum_{i \in I_u} y_i$ is latent factors of previously preferred items by user $u$):
 	
 	\begin{equation}
 		\hat{r}_{ui} = \mu + b_i + b_u  + (q_j^T + |I_u|^{-1/2}\sum_{i \in I_u} y_i) p_u
@@ -353,7 +354,7 @@
 	The minimum objective function is presented as follows:
 	
 	\begin{equation}
-		\tag*{First Modification of SVD++ by Jallouli et al. \cite{contextual}}
+		\tag*{First Modification of Extended SVD++}
 		\begin{split}
 			\mathcal{L} = &\ \dfrac{1}{2} \sum_{(u, j)} (\hat{r_{uj}} - r_{uj})^2 + \dfrac{\lambda}{2} \sum_{u \in U_j} |I_u|^{-1/2} b_u^2 + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_j|^{-1/2} b_j^2 \\
 			& + \dfrac{\lambda}{2} \sum_{u \in U_j} |I_u|^{-1/2} \|p_u\|_F^{2} + \dfrac{\lambda}{2} \sum_{j \in I_u} |U_j|^{-1/2} \|q_j\|_F^{2} \\
@@ -418,9 +419,10 @@
 	\subsubsection{Tensor Decomposition - Higher Order SVD}
 	Higher Order SVD (HOSVD) can be applied to context-based recommendation in the same way as other MF techniques \cite{tensor}. In HOSVD, the prediction model for tensor $R \in \mathbb{R}^{n * m * c}$ is shown in figure \ref{fig:tensor} and equation \ref{eqn:tensor} \cite{latentFactor-RS}. The minimum objective function $\mathcal{L}$ is shown in equation \ref{eqn:tensor-obj}.
 	
-	\begin{figure}\label{fig:tensor}
+	\begin{figure}
 		\centering
 		\caption{Illustration of HOSVD Model \cite{tensor}}
+		\label{fig:tensor}
 		\includegraphics{tensor.png}
 	\end{figure}
 	
@@ -469,9 +471,9 @@
 	Tang et al. also propose a HOSVD model for neighborhood approach in collaborative filtering \cite{tensor-neighbor} but this is beyond the scope of this paper.
 	
 	
-	\section{Comparison and Discussion of SVD-Based Method}
+	\section{Discussion of SVD-Based Techniques in Collaborative Filtering}
 
-
+	Meta and Rana provide a comparison for multiple SVD-based techniques and I extend it as shown in Table \ref{tab:comparison}.
 	\begin{table}[H]
 		\centering
 		\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -480,15 +482,22 @@
 			SVD-CF & $\checkmark$ & & & $\checkmark$ &  &  \\ \hline
 			RSVD-CF & $\checkmark$ & & & &  & $\checkmark$ \\ \hline
 			SVD++ & $\checkmark$ & $\checkmark$ & & & $\checkmark$ & $\checkmark$ \\ \hline
-			Contextual SVD \cite{contextual}& $\checkmark$ &$\checkmark$&$\checkmark$& & $\checkmark$ & $\checkmark$ \\ \hline
+			Extended SVD++ \cite{contextual}& $\checkmark$ &$\checkmark$&$\checkmark$& & $\checkmark$ & $\checkmark$ \\ \hline
 			TrustMF \cite{TrustMF}& $\checkmark$ & &$\checkmark$& & $\checkmark$ & $\checkmark$ \\ \hline
 			TrustSVD & $\checkmark$ & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
 			HOSVD-CF \cite{tensor} & $\checkmark$ & & $\checkmark$ & & & $\checkmark$ \\ \hline
 		\end{tabular}
-		\caption{Comparison of SVD Based Techniques (Adapted from Mehta and Rana \cite{review})}
-		\label{comparison}
+		\caption{Comparison of SVD Based Techniques (Extended from Mehta and Rana \cite{review})}
+		\label{tab:comparison}
 	\end{table}
 	
+	The neighborhood approach receives great research interests in 2000s until around 2010s. It is still a memory-based model and suffers from the cost of storage. Applying SVD can certainly reduces the cost of storage, but it is still computationally expensive and, as an offline algorithm, suffers from scalability \cite{RSsurvey}.
+	
+	
+	The cold-start problem (also known as new community problem) is a real challenge to collaborative filtering, and SVD is undefined for sparse matrix. A common solution is data imputation but it may distort the training matrix. There are some progress for data imputation \cite{ISVD} but modern collaborative filtering algorithm will instead resort to some demographic information mentioned by Bobadilla et al. \cite{RSsurvey}.
+	
+	
+	From my observation, researchers currently more focus on matrix factorization method in latent semantic approach than user/item-based neighborhood approach among SVD-based techniques. 
 	
 	\section{Conclusion and Future Works}
 

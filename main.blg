@@ -5,10 +5,6 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 14 items.
 Database file #1: reference.bib
-I was expecting a `,' or a `}'---line 1 of file reference.bib
- : @article{RS 
- :             survey,
-I'm skipping whatever remains of this entry
 Warning--entry type for "TrustSVD" isn't style-file defined
 --line 260 of file reference.bib
 Warning--empty booktitle in tensor
@@ -16,45 +12,45 @@ Warning--empty booktitle in Kernel-MF
 Warning--empty booktitle in social-regularization
 Warning--empty journal in ApplySVD
 Warning--empty year in ApplySVD
-You've used 29 entries,
+You've used 31 entries,
             2118 wiz_defined-function locations,
-            687 strings with 9670 characters,
-and the built_in function-call counts, 11978 in all, are:
-= -- 1203
-> -- 558
+            701 strings with 9994 characters,
+and the built_in function-call counts, 12779 in all, are:
+= -- 1280
+> -- 609
 < -- 18
-+ -- 222
-- -- 187
-* -- 816
-:= -- 1861
-add.period$ -- 95
-call.type$ -- 29
-change.case$ -- 176
++ -- 242
+- -- 205
+* -- 883
+:= -- 2000
+add.period$ -- 101
+call.type$ -- 31
+change.case$ -- 191
 chr.to.int$ -- 0
-cite$ -- 34
-duplicate$ -- 481
-empty$ -- 929
-format.name$ -- 187
-if$ -- 2619
+cite$ -- 36
+duplicate$ -- 503
+empty$ -- 981
+format.name$ -- 205
+if$ -- 2778
 int.to.chr$ -- 0
-int.to.str$ -- 29
-missing$ -- 27
-newline$ -- 145
-num.names$ -- 62
-pop$ -- 217
+int.to.str$ -- 31
+missing$ -- 29
+newline$ -- 155
+num.names$ -- 66
+pop$ -- 228
 preamble$ -- 1
-purify$ -- 147
+purify$ -- 160
 quote$ -- 0
-skip$ -- 375
+skip$ -- 389
 stack$ -- 0
-substring$ -- 779
-swap$ -- 171
+substring$ -- 835
+swap$ -- 173
 text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 116
+type$ -- 124
 warning$ -- 5
-while$ -- 119
-width$ -- 31
-write$ -- 321
-(There was 1 error message)
+while$ -- 126
+width$ -- 33
+write$ -- 343
+(There were 6 warnings)
