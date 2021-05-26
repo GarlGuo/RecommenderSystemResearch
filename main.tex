@@ -370,8 +370,50 @@
 	
 	\subsubsection{Social Information}
 	
-	Some researchers are also interested in utilizing social network information to predict ratings \cite{social-regularization} \cite{review}.
+	Some researchers are also interested in utilizing social network information to predict ratings \cite{social-regularization} \cite{review}. For example, trust information, as a social interaction, is often considered in recommender system, as we often believe our friends' tastes and follow their advice \cite{social-regularization}.
 	
+	For example, Ma et al. proposed two social regularization models for latent factor approach \cite{social-regularization}. The first model assumes that we are more similar to tastes of our friends, as shown \ref{eqn:first-social}. Notice that $\mathcal{F}^+(u)$ means the set of $u$'s outlink friends.
+	
+	\begin{equation}
+		\label{eqn:first-social}
+		\tag*{First Regularization Term}
+		\dfrac{\alpha}{2} \sum \|P_u - \dfrac{\sum_{f \in \mathcal{F}^+} \text{sim}(u, v) \times P_v }{\sum_{f \in \mathcal{F}^+} \text{sim}(u, v)} \|_F^2
+	\end{equation} 
+	
+	The second regularization model more focuses on grouping friends with similar tastes (friends with different tastes will be penalized).
+
+	\begin{equation}
+		\label{eqn:sec-social}
+		\tag*{Second Regularization Model}
+		\dfrac{\beta}{2} \sum \sum_{f \in \mathcal{F}^+} \text{sim}(u, v) \|P_u - P_v\|_F^2
+	\end{equation}
+	
+	Another example would be TrustMF suggested by Yang et al. \cite{TrustMF}. Here are some notations:
+	\begin{itemize}
+		\item Truster vector $B_u$ means other users that user $u$ trusts
+		
+		\item Trustee vector $W_u$ means other users that trust user $u$
+		
+		\item Adjacent matrix $T$ stores the directional trust as $T_{uv} = 1$ means user $u$ trusts user $v$, 0 otherwise.
+	\end{itemize}
+	
+	The objective function of truster and trustee model is shown below.
+	\begin{equation}
+		\begin{split}
+			\mathcal{L} = \sum (B_u^T Q_i - R_{ui})^2 + \lambda_T \sum (B_u^T W_v - T_{uv})^2 + \text{(L2-regularization term)} & \quad \text{simplified truster model} \\
+			\mathcal{L} = \sum (W_u^T Q_i - R_{ui})^2 + \lambda_T \sum (B_v^T W_u - T_{vu})^2 + \text{(L2-regularization term)} & \quad \text{simplified trustee model} 
+		\end{split}		
+	\end{equation}
+
+	The training of truster and trustee models in TrustMF are separated. Once both vector set are obtained, we will synthesize and calculate the final prediction rating with \footnote{The superscription $r$ in the final predicted rating means vectors trained in truster model, and the superscription $e$ means vectors trained in trustee model. }
+
+	\begin{equation}
+		\tag*{final predicted rating by TrustMF}
+		R_{ui} = f(\{\dfrac{B_u^r + W_u^r}{2}\}^T \{\dfrac{Q_i^e + Q_i^e}{2}\})
+	\end{equation}
+
+			
+			
 	\subsubsection{Tensor Decomposition - Higher Order SVD}
 	Higher Order SVD (HOSVD) can be applied to context-based recommendation in the same way as other MF techniques \cite{tensor}. In HOSVD, the prediction model for tensor $R \in \mathbb{R}^{n * m * c}$ is shown in figure \ref{fig:tensor} and equation \ref{eqn:tensor} \cite{latentFactor-RS}. The minimum objective function $\mathcal{L}$ is shown in equation \ref{eqn:tensor-obj}.
 	
@@ -438,10 +480,10 @@
 			SVD-CF & $\checkmark$ &  & $\checkmark$ &  &  \\ \hline
 			RSVD-CF & $\checkmark$ &  & &  & $\checkmark$ \\ \hline
 			SVD++ & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
+			TrustMF & $\checkmark$ &  & & $\checkmark$ & $\checkmark$ \\ \hline
 			TrustSVD & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
-			TimeSVD++ & $\checkmark$ & $\checkmark$ & & $\checkmark$ & $\checkmark$ \\ \hline
 		\end{tabular}
-		\caption{Comparison of SVD Based Techniques\cite{review}}
+		\caption{Comparison of SVD Based Techniques (Adapted from Mehta and Rana \cite{review})}
 		\label{comparison}
 	\end{table}
 	

@@ -25,3 +25,7 @@
 	\begin{equation}
 		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u - b_{ui})^2 + \lambda(\|q_i\|^2 + \|p_u\|^2 + b_u^2 + b_i^2)
 	\end{equation}
+
+
+
+\footnote{The user latent factor is $U$ here instead of $P$ and the item latent factor is $V$ instead of $Q$ here}

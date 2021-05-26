@@ -14,45 +14,45 @@ Warning--empty booktitle in Kernel-MF
 Warning--empty booktitle in social-regularization
 Warning--empty journal in ApplySVD
 Warning--empty year in ApplySVD
-You've used 27 entries,
+You've used 28 entries,
             2118 wiz_defined-function locations,
-            676 strings with 9318 characters,
-and the built_in function-call counts, 11311 in all, are:
-= -- 1143
-> -- 517
+            683 strings with 9495 characters,
+and the built_in function-call counts, 11714 in all, are:
+= -- 1181
+> -- 540
 < -- 18
-+ -- 206
-- -- 173
-* -- 765
-:= -- 1749
-add.period$ -- 90
-call.type$ -- 27
-change.case$ -- 163
++ -- 215
+- -- 181
+* -- 801
+:= -- 1817
+add.period$ -- 93
+call.type$ -- 28
+change.case$ -- 170
 chr.to.int$ -- 0
-cite$ -- 32
-duplicate$ -- 463
-empty$ -- 878
-format.name$ -- 173
-if$ -- 2482
+cite$ -- 33
+duplicate$ -- 474
+empty$ -- 907
+format.name$ -- 181
+if$ -- 2564
 int.to.chr$ -- 0
-int.to.str$ -- 27
-missing$ -- 26
-newline$ -- 136
-num.names$ -- 58
-pop$ -- 201
+int.to.str$ -- 28
+missing$ -- 27
+newline$ -- 141
+num.names$ -- 60
+pop$ -- 206
 preamble$ -- 1
-purify$ -- 136
+purify$ -- 142
 quote$ -- 0
-skip$ -- 360
+skip$ -- 367
 stack$ -- 0
-substring$ -- 742
-swap$ -- 169
+substring$ -- 774
+swap$ -- 170
 text.length$ -- 18
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 108
+type$ -- 112
 warning$ -- 5
-while$ -- 114
-width$ -- 29
-write$ -- 302
+while$ -- 117
+width$ -- 30
+write$ -- 313
 (There was 1 error message)

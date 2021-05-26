@@ -156,6 +156,12 @@ Manolis Vozalis, Angelos Markos, and Konstantinos Margaritis.
 Manolis~G Vozalis and Konstantinos~G Margaritis.
 \newblock Applying svd on generalized item-based filtering.
 
+\bibitem{TrustMF}
+Bo~Yang, Yu~Lei, Jiming Liu, and Wenjie Li.
+\newblock Social collaborative filtering by trust.
+\newblock {\em IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  39(8):1633--1647, 2017.
+
 \bibitem{RSVD}
 Shuai Zheng, Chris Ding, and Feiping Nie.
 \newblock Regularized singular value decomposition and application to
