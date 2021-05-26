@@ -40,7 +40,7 @@
 	
 	
 	\section*{Abstract}		
-	SVD, as a common tool for dimensional reduction, has been widely applied in collaborative filtering field in recommender system. Memory-based collaborative filtering techniques use SVD to obtain a reduced matrix for clustering and model-based collaborative filtering techniques use the idea of low-rank matrix decomposing to abstract latent factors. There are various research tracks and I provide an analysis of how these researches built on each other and make progress from 2000s to 2017.
+	SVD, as a common tool for dimensional reduction, has been widely applied in collaborative filtering field in recommender system. Memory-based collaborative filtering techniques use SVD to obtain a reduced matrix for clustering and model-based collaborative filtering techniques use the idea of low-rank matrix decomposing to abstract latent factors. There are various research tracks and I provide an analysis of how these researches built on each other and make progress from 2000s to the present.
 	
 	
 	\section*{Keyword}
@@ -61,7 +61,6 @@
 	
 	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches \cite{korenFactorization}. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++,  TrustSVD, and more \cite{gower} \cite{SVD++performance} \cite{contextual} \cite{korenFactorization}. 
 		
-	% some intro to CF
 	
 	
 	\section{SVD-Based CF Methods}
@@ -176,7 +175,7 @@
 	
 	 
 	\subsubsection{Adding Bias to Latent Factor Model}
-	Early recommender systems exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggest, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
+	Early recommender systems exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggest, the entire user-item interactions cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
 	\begin{equation}
 		b_{ui} = \mu + b_i + b_u
 	\end{equation}
@@ -185,7 +184,7 @@
 		\hat{r}_{ui} = b_{ui} + q_i^T  p_u 
 	\end{equation}
 	
-	and the objective becomes
+	and if we take L2 regularization, the objective becomes
 	\begin{equation}
 		\min_{q, p} \sum_{(u, i) \in \kappa} (r_{ui} - q_i^T p_u - b_{ui})^2 + \lambda(\|q_i\|^2 + \|p_u\|^2 + b_u^2 + b_i^2)
 	\end{equation}
@@ -312,7 +311,7 @@
 	SVD++ model was developed by Koren \cite{korenFactorization}. The complete formula is shown in equation \ref{SVD++}. 
 	
 	\begin{equation} \label{SVD++}
-		\tag*{SVD++ Model in Three-Tier}
+		\tag*{SVD++ Model in Three Tiers}
 		\begin{split}
 			\hat{r}_{ui} =& \ \mu + b_i + b_u \\ 
 			& + q_i^T  (p_u + |N_u|^{-1/2} \sum_{j \in N_u}y_j) \\ 
@@ -333,7 +332,7 @@
 		\item $w_{ij}$ is a weight from item $j$ to $i$. $c_{ij}$ is a significance offset (indication of predictability by item $j$ to $i$)
 	\end{itemize}
 	
-	The remaining terms form the final tier, or "neighborhood tier" called by Koren \cite{korenFactorization}, as it contributes some adjustments to the profile.
+	The remaining terms form the final tier, or "neighborhood tier" called by Koren \cite{korenFactorization}, as it contributes some adjustments to the user and item profiles.
 	
 	The algorithm of SVD++ is shown in Figure \ref{SVD++-Algo}.
 	
@@ -344,7 +343,6 @@
 		\includegraphics[width=9cm, height=9cm]{SVD++.png}
 	\end{figure}
 	
-	The entire SVD++ model usually begins with standard SVD decomposition and calculation of similarity measure as mentioned before. After forming $S^k(i)$, a gradient descent algorithm will be applied to get predicted rating from equation \ref{SVD++}, as developed by Koren et al\cite{koren2010}.  
 	
 	SVD++ model arouses great research interests has been applied and tested in numerous dataset \cite{SVD++performance} \cite{korenFactorization} and it generally beats traditional SVD-CF model. However, the contribution of SVD++ is far more than an improvement in benchmark but a new field for exploration: context \cite{contextual}, or "any information that can be used to characterize the situation of entities" by Jallouli et al. Scholars then incorporate more contexts (trust, temporal dynamics, environmental information, etc.) into SVD++ method and developed methods like TrustMF, TimeSVD++, and more \cite{contextual} \cite{review}.
 	
@@ -377,7 +375,7 @@
 	
 	Some researchers are also interested in utilizing social network information to predict ratings \cite{social-regularization} \cite{review}. For example, trust information, as a social interaction, is often considered in recommender system, as we often believe our friends' tastes and follow their advice \cite{social-regularization}.
 	
-	For example, Ma et al. proposed two social regularization models for latent factor approach \cite{social-regularization}. The first model assumes that we are more similar to tastes of our friends, as shown \ref{eqn:first-social}. Notice that $\mathcal{F}^+(u)$ means the set of $u$'s outlink friends.
+	For example, Ma et al. proposed two social regularization models for latent factor approach \cite{social-regularization}. The first model assumes that we are more similar to tastes of our friends, as shown \ref{eqn:first-social}. Notice that $\mathcal{F}^+(u)$ means the set of $u$'s outlink friends and $P_u$ is the latent user vector for $u$.
 	
 	\begin{equation}
 		\label{eqn:first-social}
@@ -402,7 +400,7 @@
 		\item Adjacent matrix $T$ stores the directional trust as $T_{uv} = 1$ means user $u$ trusts user $v$, 0 otherwise.
 	\end{itemize}
 	
-	TrustMF is a two phase model (the training of truster and trustee models are separated). Truster model tries to minimize the the difference of inner product of trust vector and item latent vector with rating, and the regularization term $\lambda_T$ controls the proportion of effect between rating and trust (as a hyperparameter) when training
+	TrustMF is a two-phase model (the training of truster and trustee models are separated). Truster model tries to minimize the the difference of inner product of trust vector and item latent vector with rating, and the regularization term $\lambda_T$ controls the proportion of effect between rating and trust (as a hyperparameter) when training
 	model. The components of trustee model is similar and the objective function of truster and trustee model is shown below.
 	\begin{equation}
 		\begin{split}
@@ -418,7 +416,7 @@
 		R_{ui} = f(\{\dfrac{B_u^r + W_u^r}{2}\}^T \{\dfrac{Q_i^e + Q_i^e}{2}\})
 	\end{equation}
 
-	Guo et al. further incorporated implicit information such as (whether a user trusts another user and whether a user rates) and developed TrustSVD that builds on SVD++ model \cite{TrustSVD}. The research that takes advantage of trust is still ongoing.
+	Guo et al. further incorporated implicit information such as (whether a user trusts another user and whether a user rates) and developed TrustSVD that builds on SVD++ model \cite{TrustSVD}. The research that takes advantage of trust and other social information is still ongoing.
 	
 	\subsubsection{Tensor Decomposition - Higher Order SVD}
 	Higher Order SVD (HOSVD) can be applied to context-based recommendation in the same way as other MF techniques \cite{tensor}. In HOSVD, the prediction model for tensor $R \in \mathbb{R}^{n * m * c}$ is shown in figure \ref{fig:tensor} and equation \ref{eqn:tensor} \cite{latentFactor-RS}. The minimum objective function $\mathcal{L}$ is shown in equation \ref{eqn:tensor-obj}.
@@ -447,9 +445,9 @@
 		\item $\Omega$ (L1/L2) regularization function.
 	\end{itemize}
 
-	Then, the factorization part is shown in Algorithm \ref{alg:tensor-alg}.
+	The factorization part is shown in Algorithm \ref{alg:tensor-alg}.
 	
-	\begin{algorithm}[h]
+	\begin{algorithm}[H]
 		\caption{Tensor Factorization by Karatzoglou et al.\cite{tensor}}
 		\label{alg:tensor-alg}
 		\begin{algorithmic}
@@ -501,7 +499,7 @@
 	The cold-start problem (also known as new community problem) is a real challenge to collaborative filtering, and SVD is undefined for sparse matrix. A common solution is data imputation but it may distort the training matrix. There are some progress for data imputation \cite{ISVD} but modern collaborative filtering algorithm will instead resort to some demographic information mentioned by Bobadilla et al. \cite{RSsurvey}.
 	
 	
-	The model-based (latent semantic approach) of SVD techniques receive great progress since 2010s. There are a lot of variants built on SVD++, and researchers have discovered numerous social / environment information to incorporate into SVD++ models (TrustSVD is a perfect example). There are also some attempts on building user/item profiles with neighborhood approach, but the number of researches involved with neighborhood approach are no longer comparable with its popularity in 2000s.
+	The model-based (latent semantic approach) of SVD techniques receive great progress since 2010s. There are a lot of variants built on SVD++, and researchers have discovered numerous social / environment information (and how) to incorporate into SVD++ models. TrustSVD is an example. There are also some attempts on building user/item profiles with neighborhood approach, but the number of researches involved with neighborhood approach are no longer comparable with its popularity in 2000s.
 	
 	
 	From my observation, researchers currently more focus on matrix factorization method in latent semantic approach than user/item-based neighborhood approach among SVD-based techniques.

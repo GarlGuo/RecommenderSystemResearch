@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  27 MAY 2021 04:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.28)  27 MAY 2021 04:41
 entering extended mode
 **./main.tex
 (main.tex
@@ -498,19 +498,19 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/Wentao/AppData/Local/MiKTeX/pdftex/config/pdftex.map}]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 69.
+(Font)              <10.95> on input line 68.
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 7
-6.
+5.
 
 ("C:\Program Files\MiKTeX\tex/latex/lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 143.
+(Font)              <9> on input line 142.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 143.
+(Font)              <5> on input line 142.
 
-Overfull \hbox (17.0412pt too wide) in paragraph at lines 152--154
+Overfull \hbox (17.0412pt too wide) in paragraph at lines 151--153
 []\T1/lmr/m/n/10.95 Prediction Rating Process & Recommendation: calculate the c
 orrelation and finally provide a recommendation 
  []
@@ -519,25 +519,28 @@ orrelation and finally provide a recommendation
 <Latent-factor-Framework1.png, id=33, 284.262pt x 225.2415pt>
 File: Latent-factor-Framework1.png Graphic file (type png)
 <use Latent-factor-Framework1.png>
-Package pdftex.def Info: Latent-factor-Framework1.png  used on input line 224.
+Package pdftex.def Info: Latent-factor-Framework1.png  used on input line 223.
 (pdftex.def)             Requested size: 199.17288pt x 170.72133pt.
  [5 <./Latent-factor-Framework1.png>] [6]
 <SVD++.png, id=42, 383.031pt x 369.7815pt>
 File: SVD++.png Graphic file (type png)
 <use SVD++.png>
-Package pdftex.def Info: SVD++.png  used on input line 344.
+Package pdftex.def Info: SVD++.png  used on input line 343.
 (pdftex.def)             Requested size: 256.09174pt x 256.09178pt.
  [7] [8 <./SVD++.png>] [9]
-<tensor.png, id=55, 283.65974pt x 163.812pt>
+<tensor.png, id=56, 283.65974pt x 163.812pt>
 File: tensor.png Graphic file (type png)
 <use tensor.png>
-Package pdftex.def Info: tensor.png  used on input line 430.
+Package pdftex.def Info: tensor.png  used on input line 428.
 (pdftex.def)             Requested size: 283.65904pt x 163.81158pt.
 
+[10 <./tensor.png>]
+Overfull \hbox (5.60332pt too wide) in paragraph at lines 502--503
+\T1/lmr/m/n/10.95 building user/item profiles with neighborhood approach, but t
+he number of researches involved with neighborhood
+ []
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[10 <./tensor.png>] [11] (main.bbl [12]
+[11] (main.bbl [12]
 Underfull \hbox (badness 3635) in paragraph at lines 85--89
 []\T1/lmr/m/n/10.95 Alexandros Karatzoglou, Xavier Amatriain, Linas Baltrunas, 
 and Nuria Oliver.  Multiverse
@@ -547,7 +550,7 @@ and Nuria Oliver.  Multiverse
 Here is how much of TeX's memory you used:
  6602 strings out of 479799
  91200 string characters out of 2879552
- 404915 words of memory out of 3000000
+ 404916 words of memory out of 3000000
  23466 multiletter control sequences out of 15000+200000
  594273 words of font info for 73 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -571,7 +574,7 @@ fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm
 /lmsy6.pfb><C:/Program Files/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program
  Files/MiKTeX/fonts/type1/public/amsfonts/symbols/msam10.pfb><C:/Program Files/
 MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (14 pages, 513760 bytes).
+Output written on main.pdf (14 pages, 513483 bytes).
 PDF statistics:
  145 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
