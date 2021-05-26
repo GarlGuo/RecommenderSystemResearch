@@ -29,7 +29,7 @@
 	
 	
 	\title{%
-		Review of Collaborative Filtering in Recommender System \\
+		Review of the Development of SVD-Based Collaborative Filtering Techniques in Recommender System \\
 		\large Final Project Report of CS 6241}
 	
 	\author{Wentao Guo}
@@ -40,10 +40,12 @@
 	
 	
 	\section*{Abstract}		
+	SVD, as a common tool for dimensional reduction, has been widely applied in collaborative filtering field in recommender system. Memory-based collaborative filtering techniques use SVD to obtain a reduced matrix for clustering and model-based collaborative filtering techniques use the idea of low-rank matrix decomposing to abstract latent factors. There are various research tracks and I provide an analysis of how these researches built on each other and make progress from 2000s to 2017.
+	
 	
 	\section*{Keyword}
 	\begin{center}
-	SVD, SVD++, Recommender System, Collaborative Filtering
+	SVD, Collaborative Filtering, Recommender System
 	\end{center}
 
 	
@@ -52,10 +54,12 @@
 	Developed in 1990s, the recommender system (RS) has been applied in e-commence, music apps, job portal, social networking and more \cite{netflix}. The recommender system collects information on users' behaviors explicitly (users' ratings on items) and implicitly (users' mouse movements, attention on one page, etc.) and makes prediction on users' preferences. For example, Netflix applies a five-star ratings to help users find their favorite movies and maintain their subscriptions \cite{gower}, and Amazon selects products based on the predicted users' favors to gain profits. 
 	
 	
+	Collaborative filtering focuses on, instead of building up a user or item profile, using user-item interactions to make predictions. There are two main approaches: memory-based (as neighborhood approach) and model-based (latent semantic, matrix factorization approach). The idea of find a low-rank matrix, similar to SVD's applications in \textit{latent semantic indexing}, is applied in both approaches starting in 2000s.
+	
 	In October 2006, Netflix launched a competition for which they rewarded the team that can beat Netflix's Cinematch system by at least 10\% Root Mean Squared Error \cite{gower}. This competition arouse great attention in collaborative filtering field as the dataset covered 100 million ratings for 500, 000 anonymous customers on 17, 000 movies, which was greater than previous public dataset in the orders of magnitude \cite{MFinRS}. The final grand prize was given to "Bellkor's Pragmatic Chaos" team in 2009 \cite{gower} \cite{koren}. 
 	
 	
-	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches \cite{korenFactorization}. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++, iterative SVD, and more \cite{gower} \cite{SVD++performance} \cite{contextual} \cite{korenFactorization}. 
+	In this competition, matrix factorization approaches raised people's attention as the top teams in this competition frequently applying it to beat Bayes or probabilistic approaches \cite{korenFactorization}. Singular Value Decomposition as the classical latent semantic indexing approach in information retrieval was found as a great fit for spanning customers data with low dimensions and often adapted to various variants as regularized SVD, SVD++,  TrustSVD, and more \cite{gower} \cite{SVD++performance} \cite{contextual} \cite{korenFactorization}. 
 		
 	% some intro to CF
 	
@@ -92,7 +96,7 @@
 	
 	We then compute $U_k \Sigma_k V_k^T$ as equation \ref{trun-SVD}, and form two matrix products: $U_k \sqrt{\Sigma_k^T}$ and $\sqrt{\Sigma_k} V_k^T$.
 	
-	There are some variants regarding the computation of predicted rating \cite{ApplySVD} \cite{SVD-performance}. For example, Manolis et al. \cite{SVD-performance} provided a formula for SVD-CF prediction rating for user $u$ on item $i$ as:
+	There are some variants regarding the direct computation of predicted rating \cite{ApplySVD} \cite{SVD-performance}. For example, Manolis et al. \cite{SVD-performance} provided a formula for SVD-CF prediction rating for user $u$ on item $i$ as:
 	
 	\begin{equation}
 		\hat{r}_{ui} = \bar{r_u} + U_k \sqrt{\Sigma_k^T [u]} \sqrt{\Sigma_k} V_k^T (i)
@@ -159,7 +163,7 @@
 	\end{equation}
 	
 	
-	Although latent factor model in matrix factorization method is not directly involved with SVD (as it does not explicitly computes $U \Sigma V$), researchers often dub the name "SVD" since 1) SVD generates the minimum of $R - \hat{R}$ in Frobenius norm with $\hat{R}$ rank $k$ and the objective of latent factor model is often $\min R - P Q$ and 2) the idea of matrix factorization is to represent $R$ in a product of low rank matrix of latent factors as $P$ (user matrix) and $Q$ (item matrix), which is similar to the idea of SVD on decomposing a large matrix into low rank matrices. 
+	Although latent factor model in matrix factorization method is not directly involved with SVD (as it does not explicitly computes $U \Sigma V$), researchers often dub the name "SVD" since 1) SVD generates the minimum of $R - \hat{R}$ in Frobenius norm with $\hat{R}$ rank $k$ and the objective of latent factor model is often $\min \|R - P Q\|_F^2$ and 2) the idea of matrix factorization is to represent $R$ in a product of low rank matrix of latent factors as $P$ (user matrix) and $Q$ (item matrix), which is similar to the idea of SVD on decomposing a large matrix into low rank matrices. 
 	
 	The latent factor model tries to minimize the prediction error in some metrics. Conventional evaluation metrics includes root mean squared error (RMSE) and mean absolute error (MAE). Researchers usually minimize an objective function $\mathcal{L}$ to obtain prediction. (Stochastic) gradient descent will be applied if the problem is convex, or if in the case of biconvex alternating least square (ALS) will be applied such as what Zheng et al. show \cite{RSVD}.
 	
@@ -172,7 +176,7 @@
 	
 	 
 	\subsubsection{Adding Bias to Latent Factor Model}
-	Early recommender system exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggested, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
+	Early recommender systems exhibit a systematic bias for users giving generally higher ratings than others or items receive higher ratings than others \cite{MFinRS}. Therefore, as Koren, et al. suggest, the entire user-item interaction cannot be simply explained by $q_i^T  p_u$, and a bias term exists. A first-order approximation of bias is as follows \cite{MFinRS}
 	\begin{equation}
 		b_{ui} = \mu + b_i + b_u
 	\end{equation}
@@ -208,7 +212,7 @@
 		
 		\item define objective function
 		
-		The objective $\mathcal{L}$ measures the error difference between $\hat{R}$ and $R$, and generally convex on variables $p$ and $q$. Upon defining $\mathcal{L}$, a numerical optimization process shall also be determined.
+		The objective $\mathcal{L}$ measures the error difference between $\hat{R}$ and $R$, and generally biconvex on $p$ and $q$. Upon defining $\mathcal{L}$, a numerical optimization process (such as ALS, SGD) shall also be determined.
 		
 		\item define model learning
 		
@@ -235,7 +239,7 @@
 	\newcommand{\minuseq}{\mathrel{-}=}
 	Regularized SVD model begins with Simon Funk in the Netflix challenge \cite{MFinRS}. This is essentially a ridge regularization and the main body of looping update part is shown in Algorithm \ref{alg:L2}.
 	\begin{algorithm}
-		\caption{Simon Funk's Update Body with Ridge (L2) Regularization\cite{MFinRS}}
+		\caption{Simon Funk's Looping Update Body with Ridge (L2) Regularization \cite{MFinRS}}
 		\label{alg:L2}
 		\begin{algorithmic}
 			\STATE $e_{ui} = \ r_{ui} - q_i^T p_u$
@@ -248,7 +252,7 @@
 	
 	\floatname{algorithm}{Algorithm}
 	\begin{algorithm}
-		\caption{Ji et al. Looping Update Body with Lasso (L1) Regularization\cite{RSVD-News}}
+		\caption{Ji et al. Looping Update Body with Lasso (L1) Regularization \cite{RSVD-News}}
 		\label{alg:L1}
 		\begin{algorithmic}
 			\IF{$p_u \geq 0$}
@@ -283,7 +287,7 @@
 		\end{algorithmic}
 	\end{algorithm}
 
-	Zheng et al. \cite{RSVD} have proven that RSVD is still in SVD subspace and it converges generally faster than standard SVD approach. The RSVD objective function is not convex (RSVD is actually biconvex), but it still has a global optimal solution that can be obtained as the global optimal solution as a closed form \cite{RSVD}.
+	Zheng et al. \cite{RSVD} prove that RSVD is still in SVD subspace and it converges generally faster than standard SVD approach. The RSVD objective function is not convex (RSVD is actually biconvex), but it still has a global optimal solution that can be obtained as a closed form \cite{RSVD}.
 	
 	\subsubsection{Weighted-$\lambda$-Regularization}
 	Besides L1 and L2 regularization techniques, scholars also have interests on weighted-$\lambda$-regularization, as proposed by Zhou et al. \cite{weighted-lambda-old} and the regularization term is shown in equation \ref{eqn:weighted-lambda}. The rationale behind such regularization is to penalize items or users that have more ratings and to give a chance for new users or items, as a potential solution to cold-start issue of collaborative filtering. Notice that $I_u$ means the set of all items user $u$ has rated and $U_i$ is the set of all users that rate item $i$.
@@ -407,7 +411,7 @@
 		\end{split}		
 	\end{equation}
 
-	Once both vector set are obtained, we will synthesize and calculate the final prediction rating with \footnote{The superscription $r$ in the final predicted rating means vectors trained in truster model, and the superscription $e$ means vectors trained in trustee model. }
+	Once both vector sets are obtained, we will synthesize and calculate the final prediction rating with the following equation. \footnote{The superscription $r$ in the final predicted rating means vectors trained in truster model, and the superscription $e$ means vectors trained in trustee model. }
 
 	\begin{equation}
 		\tag*{final prediction rating by TrustMF}
@@ -497,11 +501,14 @@
 	The cold-start problem (also known as new community problem) is a real challenge to collaborative filtering, and SVD is undefined for sparse matrix. A common solution is data imputation but it may distort the training matrix. There are some progress for data imputation \cite{ISVD} but modern collaborative filtering algorithm will instead resort to some demographic information mentioned by Bobadilla et al. \cite{RSsurvey}.
 	
 	
-	From my observation, researchers currently more focus on matrix factorization method in latent semantic approach than user/item-based neighborhood approach among SVD-based techniques. 
+	The model-based (latent semantic approach) of SVD techniques receive great progress since 2010s. There are a lot of variants built on SVD++, and researchers have discovered numerous social / environment information to incorporate into SVD++ models (TrustSVD is a perfect example). There are also some attempts on building user/item profiles with neighborhood approach, but the number of researches involved with neighborhood approach are no longer comparable with its popularity in 2000s.
+	
+	
+	From my observation, researchers currently more focus on matrix factorization method in latent semantic approach than user/item-based neighborhood approach among SVD-based techniques.
 	
 	\section{Conclusion and Future Works}
 
-	The research on SVD-based neighborhood approach and latent factor approach is still ongoing. The basic idea of collaborative filtering, however, still does not change but more user or item-related information, such as implicit feedback and user trust, is identified and utilized as research making progress. In this paper, I have delineated several research tracks and the move of research interests from 2000s to the present. In the future, I will do more research on and possibly develop my own variant of trust SVD model since there are so many ways to approach and process this information. 
+	The research on SVD-based neighborhood approach and latent factor approach is still ongoing. The basic idea of collaborative filtering, however, still does not change but more user or item-related information, such as implicit feedback and user trust, is identified and utilized as research making progress. In this paper, I have delineated several research tracks and the move of research interests on SVD-based collaborative filtering methods from 2000s to around 2017. In the future, I will do more research on and possibly develop my own variant of trust SVD model since there are so many ways to approach and process this social information. 
 
 	\bibliographystyle{plain}
 	\bibliography{reference.bib}
